@@ -1,8 +1,7 @@
-//
-//  User.swift
-//  brichios
-//
-//  Created by Apple Esprit on 12/11/2024.
-//
-
-import Foundation
+struct User:Codable{
+    var name : String
+    var email : String
+    var numTel : String
+    var password : String
+    var role : String = "user"
+}
