@@ -10,6 +10,7 @@ struct Login: View {
     @State private var loginSuccess = false
     @State private var showPassword = false
     @ObservedObject var viewModel: SigninViewModel
+    @State private var navigateToHome = false
     
     var body: some View {
         VStack {
@@ -111,6 +112,8 @@ struct Login: View {
                         .shadow(radius: 15)
                 }
             }
+        }.fullScreenCover(isPresented: $navigateToHome) {
+            SignUp(viewModel:SignupViewModel(userRepository: UserRepository())) // Navigation vers Home()
         }
     }
     private func validateAndLogin() {
@@ -130,6 +133,7 @@ struct Login: View {
                 self.isLoading = false
                 if viewModel.loginUiState.isLoggedIn {
                     self.loginSuccess = true
+                    self.navigateToHome = true
                 }
             }
         }

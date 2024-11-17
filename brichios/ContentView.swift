@@ -85,7 +85,7 @@ struct Home: View {
             if self.index == 0 {
                 Login(viewModel: viewModel)
             } else {
-                SignUp()
+                SignUp(viewModel:SignupViewModel(userRepository: UserRepository()))
             }
 
             if self.index == 0 {

@@ -1,8 +1,9 @@
 
 import Alamofire
+import Foundation
 
 class UserRepository : ApiService {
-    private let baseURL = "http://172.18.1.239:3000/"
+    private let baseURL = "http://192.168.76.164:3000/"
 
         func createUser(user: User, completion: @escaping (Result<User, Error>) -> Void) {
             let url = baseURL + "auth/signup"
@@ -19,18 +20,33 @@ class UserRepository : ApiService {
 
     func login(request: LoginRequest, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
         let url = baseURL + "auth/login"
-        AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default)
-            .responseDecodable(of: LoginResponse.self) { response in
-                switch response.result {
-                case .success(let loginResponse):
-                    // Print the login response
-                    print("Login Successful: \(loginResponse)")
-                    completion(.success(loginResponse))
-                case .failure(let error):
-                    print("Error during login: \(error.localizedDescription)")
-                    completion(.failure(error))
-                }
-            }
+        AF.request(url,
+                          method: .post,
+                          parameters: request,
+                          encoder: JSONParameterEncoder.default)
+                    .responseData { response in
+                        // Debug: Imprime la réponse brute
+                        if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                            print("Raw server response: \(str)")
+                        }
+                        
+                        switch response.result {
+                        case .success(let data):
+                            do {
+                                let decoder = JSONDecoder()
+                                decoder.keyDecodingStrategy = .convertFromSnakeCase // Si votre API utilise snake_case
+                                let loginResponse = try decoder.decode(LoginResponse.self, from: data)
+                                completion(.success(loginResponse))
+                            } catch {
+                                print("Decoding error: \(error)")
+                                completion(.failure(error))
+                            }
+                            
+                        case .failure(let error):
+                            print("Network error: \(error)")
+                            completion(.failure(error))
+                        }
+                    }
     }
 
 

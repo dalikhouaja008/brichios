@@ -33,36 +33,39 @@ class SigninViewModel: ObservableObject {
     @Published var passwordError: String = ""
     @Published var emailError: String = ""
     
+    
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
     }
     
     func loginUser(email: String, password: String) {
         loginUiState = LoginUiState(isLoading: true)
-        
         let loginRequest = LoginRequest(email: email, password: password)
-        print(loginRequest)
-        
+        print("Login Request:", loginRequest)
         userRepository.login(request: loginRequest) { [weak self] result in
             guard let self = self else { return }
-            print(result)
-            switch result {
-            case .success(let loginResponse):
-                print("Login Response: \(loginResponse)")
-                self.loginUiState = LoginUiState(
-                    isLoading: false,
-                    isLoggedIn: true,
-                    token: loginResponse.accessToken,
-                    refreshToken: loginResponse.refreshToken,
-                    user:loginResponse.user
-                )
-            case .failure(let error):
-                print("Error during login: \(error)")
-                self.loginUiState = LoginUiState(
-                    isLoading: false,
-                    isLoggedIn: false,
-                    errorMessage: error.localizedDescription
-                )
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let loginResponse):
+                    print("Login successful - Token:", loginResponse.accessToken)
+                    // Sauvegardez les tokens
+                    UserDefaults.standard.set(loginResponse.accessToken, forKey: "accessToken")
+                    UserDefaults.standard.set(loginResponse.refreshToken, forKey: "refreshToken")
+                    self.loginUiState = LoginUiState(
+                        isLoading: false,
+                        isLoggedIn: true,
+                        token: loginResponse.accessToken,
+                        refreshToken: loginResponse.refreshToken,
+                        user: loginResponse.user
+                    )
+                case .failure(let error):
+                    print("Login failed:", error)
+                    self.loginUiState = LoginUiState(
+                        isLoading: false,
+                        isLoggedIn: false,
+                        errorMessage: "Échec de la connexion: \(error.localizedDescription)"
+                    )
+                }
             }
         }
     }
@@ -111,6 +114,8 @@ class SigninViewModel: ObservableObject {
         emailError = ""
         return true
     }
+   
+    
     
     func validatePassword(_ password: String) -> Bool {
         if password.isEmpty {
@@ -125,7 +130,7 @@ class SigninViewModel: ObservableObject {
         return true
     }
     
-    
+   
      func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
