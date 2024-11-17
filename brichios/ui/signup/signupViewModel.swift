@@ -32,6 +32,7 @@ class SignupViewModel: ObservableObject {
     @Published var emailError: String = ""
     @Published var phoneError: String = ""
     @Published var usernameError: String = ""
+    @Published var confirmPasswordError: String = ""
     
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
@@ -86,18 +87,27 @@ class SignupViewModel: ObservableObject {
         return true
     }
     
-    func validatePassword(_ password: String) -> Bool {
+    func validatePasswordAndConfirm(password: String, confirmPassword: String) -> Bool {
+        passwordError = ""
+        confirmPasswordError = ""
+
         if password.isEmpty {
             passwordError = "Password field is empty"
             return false
         }
+
         if password.count < 6 {
             passwordError = "Password must be at least 6 characters"
             return false
         }
-        passwordError = ""
+        if password != confirmPassword {
+            confirmPasswordError = "Passwords do not match"
+            return false
+        }
+
         return true
     }
+
     func validatePhoneNumber(_ phoneNumber: String) -> Bool {
         if phoneNumber.isEmpty {
             phoneError = "Phone number field is empty"

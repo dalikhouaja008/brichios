@@ -38,7 +38,7 @@ class SigninViewModel: ObservableObject {
         self.userRepository = userRepository
     }
     
-    func loginUser(email: String, password: String) {
+    func loginUser(email: String, password: String, isRemembered: Bool) {
         loginUiState = LoginUiState(isLoading: true)
         let loginRequest = LoginRequest(email: email, password: password)
         print("Login Request:", loginRequest)
@@ -48,9 +48,15 @@ class SigninViewModel: ObservableObject {
                 switch result {
                 case .success(let loginResponse):
                     print("Login successful - Token:", loginResponse.accessToken)
-                    // Sauvegardez les tokens
-                    UserDefaults.standard.set(loginResponse.accessToken, forKey: "accessToken")
-                    UserDefaults.standard.set(loginResponse.refreshToken, forKey: "refreshToken")
+                    // Sauvegardez les tokens dasn swiftKeycchainWrapper
+                    Auth.shared.setCredentials(
+                       accessToken: loginResponse.accessToken,
+                       refreshToken: loginResponse.refreshToken,
+                       email: loginResponse.user.email,
+                       password: loginResponse.user.password,
+                       isRemembered: isRemembered
+                  )
+                                       
                     self.loginUiState = LoginUiState(
                         isLoading: false,
                         isLoggedIn: true,

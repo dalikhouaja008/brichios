@@ -15,6 +15,11 @@
 		7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */; };
 		7AF79D472CEA03E800DD0C64 /* onBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF79D462CEA03E800DD0C64 /* onBoardingView.swift */; };
 		7AF79D492CEA042D00DD0C64 /* pageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF79D482CEA042D00DD0C64 /* pageView.swift */; };
+		7AF79D4B2CEA613B00DD0C64 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF79D4A2CEA613B00DD0C64 /* Auth.swift */; };
+		7AF79D522CEA7DE000DD0C64 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7AF79D512CEA7DE000DD0C64 /* Alamofire */; };
+		7AF79D542CEA7DE000DD0C64 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7AF79D532CEA7DE000DD0C64 /* AlamofireDynamic */; };
+		7AF79D572CEA7E0B00DD0C64 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 7AF79D562CEA7E0B00DD0C64 /* SwiftKeychainWrapper */; };
+		A2C5E1BC6B4289102443ACB7 /* Pods_brichios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D64722888E1EC3CD7B08E1A /* Pods_brichios.framework */; };
 		B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F262CE3BAA400432CFB /* AppDelegate.swift */; };
 		B0DE1F292CE3BAA400432CFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F282CE3BAA400432CFB /* SceneDelegate.swift */; };
 		B0DE1F2B2CE3BAA400432CFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F2A2CE3BAA400432CFB /* ViewController.swift */; };
@@ -29,10 +34,10 @@
 		B0DE1F4E2CE3D4C200432CFB /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F4D2CE3D4C200432CFB /* LoginRequest.swift */; };
 		B0DE1F502CE3D56C00432CFB /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F4F2CE3D56C00432CFB /* LoginResponse.swift */; };
 		B0DE1F522CE3DB6B00432CFB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F512CE3DB6B00432CFB /* UserRepository.swift */; };
-		B0DE1F552CE3DD4100432CFB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B0DE1F542CE3DD4100432CFB /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D64722888E1EC3CD7B08E1A /* Pods_brichios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_brichios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A6F5F892CE4EEAE0015DEAF /* signinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signinView.swift; sourceTree = "<group>"; };
 		7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordViewodel.swift; sourceTree = "<group>"; };
 		7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordView.swift; sourceTree = "<group>"; };
@@ -41,6 +46,9 @@
 		7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupViewModel.swift; sourceTree = "<group>"; };
 		7AF79D462CEA03E800DD0C64 /* onBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onBoardingView.swift; sourceTree = "<group>"; };
 		7AF79D482CEA042D00DD0C64 /* pageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageView.swift; sourceTree = "<group>"; };
+		7AF79D4A2CEA613B00DD0C64 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Auth.swift; path = brichios/ui/onBoarding/Auth.swift; sourceTree = SOURCE_ROOT; };
+		A4BEB2A3DDAB29E0DE5B6894 /* Pods-brichios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-brichios.debug.xcconfig"; path = "Target Support Files/Pods-brichios/Pods-brichios.debug.xcconfig"; sourceTree = "<group>"; };
+		A926CF316B05BAAC8D376096 /* Pods-brichios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-brichios.release.xcconfig"; path = "Target Support Files/Pods-brichios/Pods-brichios.release.xcconfig"; sourceTree = "<group>"; };
 		B0DE1F232CE3BAA400432CFB /* brichios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = brichios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0DE1F262CE3BAA400432CFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0DE1F282CE3BAA400432CFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +72,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0DE1F552CE3DD4100432CFB /* Alamofire in Frameworks */,
+				A2C5E1BC6B4289102443ACB7 /* Pods_brichios.framework in Frameworks */,
+				7AF79D542CEA7DE000DD0C64 /* AlamofireDynamic in Frameworks */,
+				7AF79D572CEA7E0B00DD0C64 /* SwiftKeychainWrapper in Frameworks */,
+				7AF79D522CEA7DE000DD0C64 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,11 +109,22 @@
 			path = onBoarding;
 			sourceTree = "<group>";
 		};
+		9D91C73C9AE62376D9B36C76 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A4BEB2A3DDAB29E0DE5B6894 /* Pods-brichios.debug.xcconfig */,
+				A926CF316B05BAAC8D376096 /* Pods-brichios.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B0DE1F1A2CE3BAA400432CFB = {
 			isa = PBXGroup;
 			children = (
 				B0DE1F252CE3BAA400432CFB /* brichios */,
 				B0DE1F242CE3BAA400432CFB /* Products */,
+				9D91C73C9AE62376D9B36C76 /* Pods */,
+				F7CFEA830385A2B2EC3A97EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,6 +178,7 @@
 		B0DE1F3F2CE3BBFB00432CFB /* local */ = {
 			isa = PBXGroup;
 			children = (
+				7AF79D4A2CEA613B00DD0C64 /* Auth.swift */,
 			);
 			path = local;
 			sourceTree = "<group>";
@@ -197,6 +220,14 @@
 			path = signin;
 			sourceTree = "<group>";
 		};
+		F7CFEA830385A2B2EC3A97EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1D64722888E1EC3CD7B08E1A /* Pods_brichios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -204,9 +235,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0DE1F3A2CE3BAA400432CFB /* Build configuration list for PBXNativeTarget "brichios" */;
 			buildPhases = (
+				5E27189CD1FCC6061DDB5B4D /* [CP] Check Pods Manifest.lock */,
 				B0DE1F1F2CE3BAA400432CFB /* Sources */,
 				B0DE1F202CE3BAA400432CFB /* Frameworks */,
 				B0DE1F212CE3BAA400432CFB /* Resources */,
+				5B9D97DD992DEB2F06EB351B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,7 +247,9 @@
 			);
 			name = brichios;
 			packageProductDependencies = (
-				B0DE1F542CE3DD4100432CFB /* Alamofire */,
+				7AF79D512CEA7DE000DD0C64 /* Alamofire */,
+				7AF79D532CEA7DE000DD0C64 /* AlamofireDynamic */,
+				7AF79D562CEA7E0B00DD0C64 /* SwiftKeychainWrapper */,
 			);
 			productName = brichios;
 			productReference = B0DE1F232CE3BAA400432CFB /* brichios.app */;
@@ -245,7 +280,8 @@
 			);
 			mainGroup = B0DE1F1A2CE3BAA400432CFB;
 			packageReferences = (
-				B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */,
+				7AF79D502CEA7DE000DD0C64 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				7AF79D552CEA7E0B00DD0C64 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = B0DE1F242CE3BAA400432CFB /* Products */;
 			projectDirPath = "";
@@ -269,6 +305,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5B9D97DD992DEB2F06EB351B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-brichios/Pods-brichios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-brichios/Pods-brichios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-brichios/Pods-brichios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E27189CD1FCC6061DDB5B4D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-brichios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B0DE1F1F2CE3BAA400432CFB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -289,6 +367,7 @@
 				B0DE1F2B2CE3BAA400432CFB /* ViewController.swift in Sources */,
 				7A6F5F912CE4EFAA0015DEAF /* ContentView.swift in Sources */,
 				7A6F5F942CE4EFE00015DEAF /* signupView.swift in Sources */,
+				7AF79D4B2CEA613B00DD0C64 /* Auth.swift in Sources */,
 				B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */,
 				7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */,
 				7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */,
@@ -434,12 +513,13 @@
 		};
 		B0DE1F3B2CE3BAA400432CFB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4BEB2A3DDAB29E0DE5B6894 /* Pods-brichios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 953V584L2D;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = brichios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -462,12 +542,13 @@
 		};
 		B0DE1F3C2CE3BAA400432CFB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A926CF316B05BAAC8D376096 /* Pods-brichios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 953V584L2D;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = brichios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -512,21 +593,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		7AF79D502CEA7DE000DD0C64 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.10.1;
+			};
+		};
+		7AF79D552CEA7E0B00DD0C64 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B0DE1F542CE3DD4100432CFB /* Alamofire */ = {
+		7AF79D512CEA7DE000DD0C64 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 7AF79D502CEA7DE000DD0C64 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		7AF79D532CEA7DE000DD0C64 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7AF79D502CEA7DE000DD0C64 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		7AF79D562CEA7E0B00DD0C64 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7AF79D552CEA7E0B00DD0C64 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 

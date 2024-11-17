@@ -46,7 +46,7 @@ class ViewController: UIViewController {
                 }
                 
                 // Appeler la méthode de connexion
-                viewModel.loginUser(email: email, password: password)
+                //viewModel.loginUser(email: email, password: password)
     }
     
     private func handleLoginUiState(_ state: LoginUiState) {

@@ -5,13 +5,17 @@ import SwiftUI
 struct ContentView: View {
     // Utilisation de AppStorage pour suivre le premier lancement
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
-
+    @EnvironmentObject var auth: Auth
+    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color("Color"), Color("Color1"), Color("Color2")]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
 
-            if isFirstLaunch {
+            if auth.loggedIn{
+                SignUp(viewModel: SignupViewModel(userRepository: UserRepository()))
+            }
+            else if isFirstLaunch {
                 // Afficher la vue d'onboarding pour le premier lancement
                 OnboardingView(isFirstLaunch: $isFirstLaunch)
             } else {

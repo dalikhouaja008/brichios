@@ -1,0 +1,6 @@
+framework module Pods_brichios {
+  umbrella header "Pods-brichios-umbrella.h"
+
+  export *
+  module * { export * }
+}

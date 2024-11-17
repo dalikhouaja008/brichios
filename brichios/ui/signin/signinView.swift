@@ -12,6 +12,7 @@ struct Login: View {
     @ObservedObject var viewModel: SigninViewModel
     @State private var navigateToHome = false
     
+    
     var body: some View {
         VStack {
             VStack(spacing: 0) {
@@ -91,7 +92,12 @@ struct Login: View {
             .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
             .padding(.top, 25)
             .padding(.horizontal)
-            
+            Toggle(isOn: $isRemembered) {
+                Text("Se souvenir de moi")
+                    .font(.subheadline)
+            }
+            .padding(.horizontal)
+
             Button(action: {
                 validateAndLogin()
             }) {
@@ -112,6 +118,7 @@ struct Login: View {
                         .shadow(radius: 15)
                 }
             }
+            
         }.fullScreenCover(isPresented: $navigateToHome) {
             SignUp(viewModel:SignupViewModel(userRepository: UserRepository())) // Navigation vers Home()
         }
@@ -126,8 +133,7 @@ struct Login: View {
         // Si les deux sont valides, procéder à la connexion
         if isEmailValid && isPasswordValid {
             isLoading = true
-            viewModel.loginUser(email: mail, password: pass)
-            
+            viewModel.loginUser(email: mail, password: pass, isRemembered: isRemembered)
             // Observer le changement d'état de connexion
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.isLoading = false
