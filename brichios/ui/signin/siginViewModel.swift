@@ -4,7 +4,7 @@ struct LoginUiState {
     var isLoggedIn: Bool
     var token: String?
     var refreshToken: String?
-    var userId: String?
+    var user: User?
     var errorMessage: String?
     var hasNavigated: Bool
     
@@ -13,7 +13,7 @@ struct LoginUiState {
         isLoggedIn: Bool = false,
         token: String? = nil,
         refreshToken: String? = nil,
-        userId: String? = nil,
+        user: User? = nil,
         errorMessage: String? = nil,
         hasNavigated: Bool = false
     ) {
@@ -21,7 +21,7 @@ struct LoginUiState {
         self.isLoggedIn = isLoggedIn
         self.token = token
         self.refreshToken = refreshToken
-        self.userId = userId
+        self.user = user
         self.errorMessage = errorMessage
         self.hasNavigated = hasNavigated
     }
@@ -29,8 +29,9 @@ struct LoginUiState {
 
 class SigninViewModel: ObservableObject {
     private let userRepository: UserRepository
-    
     @Published private(set) var loginUiState = LoginUiState()
+    @Published var passwordError: String = ""
+    @Published var emailError: String = ""
     
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
@@ -40,20 +41,23 @@ class SigninViewModel: ObservableObject {
         loginUiState = LoginUiState(isLoading: true)
         
         let loginRequest = LoginRequest(email: email, password: password)
+        print(loginRequest)
         
         userRepository.login(request: loginRequest) { [weak self] result in
             guard let self = self else { return }
-            
+            print(result)
             switch result {
             case .success(let loginResponse):
+                print("Login Response: \(loginResponse)")
                 self.loginUiState = LoginUiState(
                     isLoading: false,
                     isLoggedIn: true,
                     token: loginResponse.accessToken,
                     refreshToken: loginResponse.refreshToken,
-                    userId: loginResponse.userId
+                    user:loginResponse.user
                 )
             case .failure(let error):
+                print("Error during login: \(error)")
                 self.loginUiState = LoginUiState(
                     isLoading: false,
                     isLoggedIn: false,
@@ -78,7 +82,7 @@ class SigninViewModel: ObservableObject {
                     isLoggedIn: true,
                     token: loginResponse.accessToken,
                     refreshToken: loginResponse.refreshToken,
-                    userId: loginResponse.userId
+                    user:loginResponse.user
                 )
             case .failure(let error):
                 self.loginUiState = LoginUiState(
@@ -90,33 +94,39 @@ class SigninViewModel: ObservableObject {
         }
     }
     
-    // Reste des méthodes de validation inchangées
+    func resetErrors() {
+        emailError = ""
+        passwordError = ""
+    }
     
-    func validateEmail(_ email: String, setError: (String) -> Void) -> Bool {
+    func validateEmail(_ email: String) -> Bool {
         if email.isEmpty {
-            setError("Email must not be empty")
+            emailError = "Email field is empty"
             return false
-        } else if !isValidEmail(email) {
-            setError("Please enter a valid email")
-            return false
-        } else {
-            return true
         }
+        if !isValidEmail(email) {
+            emailError = "Please enter a valid email"
+            return false
+        }
+        emailError = ""
+        return true
     }
     
-    func validatePassword(_ password: String, setError: (String) -> Void) -> Bool {
+    func validatePassword(_ password: String) -> Bool {
         if password.isEmpty {
-            setError("Password must not be empty")
+            passwordError = "Password field is empty"
             return false
-        } else if password.count < 6 {
-            setError("Password must be at least 6 characters")
-            return false
-        } else {
-            return true
         }
+        if password.count < 6 {
+            passwordError = "Password must be at least 6 characters"
+            return false
+        }
+        passwordError = ""
+        return true
     }
     
-    private func isValidEmail(_ email: String) -> Bool {
+    
+     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)

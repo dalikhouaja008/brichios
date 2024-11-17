@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class signinViewController: UIViewController {
 
@@ -16,7 +17,11 @@ class signinViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    
+    @IBSegueAction func signinviewSegue(_ coder: NSCoder) -> UIViewController? {
+        return UIHostingController(coder: coder, rootView: ContentView())
+    }
+    
     /*
     // MARK: - Navigation
 

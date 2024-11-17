@@ -37,8 +37,8 @@ class ViewController: UIViewController {
                 // Validation des champs
                 var errorMessage: String?
                 
-                if !viewModel.validateEmail(email, setError: { errorMessage = $0 }) ||
-                   !viewModel.validatePassword(password, setError: { errorMessage = $0 }) {
+                if !viewModel.validateEmail(email) ||
+                   !viewModel.validatePassword(password) {
                     if let message = errorMessage {
                         showError(message)
                     }
@@ -58,7 +58,8 @@ class ViewController: UIViewController {
                 // Naviguer vers une autre vue ou effectuer une action appropriée
             } else if let errorMessage = state.errorMessage {
                 showError(errorMessage)
-                print(errorMessage)
+                print("hhh")
+                //print(errorMessage)
             }
         }
     

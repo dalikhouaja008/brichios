@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A6F5F8A2CE4EEAE0015DEAF /* signinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F892CE4EEAE0015DEAF /* signinView.swift */; };
+		7A6F5F8D2CE4EF050015DEAF /* forgetPasswordViewodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */; };
+		7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */; };
+		7A6F5F912CE4EFAA0015DEAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F902CE4EFAA0015DEAF /* ContentView.swift */; };
+		7A6F5F942CE4EFE00015DEAF /* signupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F932CE4EFE00015DEAF /* signupView.swift */; };
+		7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */; };
+		7AF79D472CEA03E800DD0C64 /* onBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF79D462CEA03E800DD0C64 /* onBoardingView.swift */; };
+		7AF79D492CEA042D00DD0C64 /* pageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF79D482CEA042D00DD0C64 /* pageView.swift */; };
 		B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F262CE3BAA400432CFB /* AppDelegate.swift */; };
 		B0DE1F292CE3BAA400432CFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F282CE3BAA400432CFB /* SceneDelegate.swift */; };
 		B0DE1F2B2CE3BAA400432CFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F2A2CE3BAA400432CFB /* ViewController.swift */; };
@@ -25,6 +33,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A6F5F892CE4EEAE0015DEAF /* signinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signinView.swift; sourceTree = "<group>"; };
+		7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordViewodel.swift; sourceTree = "<group>"; };
+		7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordView.swift; sourceTree = "<group>"; };
+		7A6F5F902CE4EFAA0015DEAF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7A6F5F932CE4EFE00015DEAF /* signupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupView.swift; sourceTree = "<group>"; };
+		7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupViewModel.swift; sourceTree = "<group>"; };
+		7AF79D462CEA03E800DD0C64 /* onBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onBoardingView.swift; sourceTree = "<group>"; };
+		7AF79D482CEA042D00DD0C64 /* pageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageView.swift; sourceTree = "<group>"; };
 		B0DE1F232CE3BAA400432CFB /* brichios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = brichios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0DE1F262CE3BAA400432CFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0DE1F282CE3BAA400432CFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +71,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A6F5F8B2CE4EEE80015DEAF /* forgetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */,
+				7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */,
+			);
+			path = forgetPassword;
+			sourceTree = "<group>";
+		};
+		7A6F5F922CE4EFC00015DEAF /* signup */ = {
+			isa = PBXGroup;
+			children = (
+				7A6F5F932CE4EFE00015DEAF /* signupView.swift */,
+				7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */,
+			);
+			path = signup;
+			sourceTree = "<group>";
+		};
+		7AF79D452CEA03CD00DD0C64 /* onBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				7AF79D462CEA03E800DD0C64 /* onBoardingView.swift */,
+				7AF79D482CEA042D00DD0C64 /* pageView.swift */,
+			);
+			path = onBoarding;
+			sourceTree = "<group>";
+		};
 		B0DE1F1A2CE3BAA400432CFB = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +121,7 @@
 				B0DE1F3D2CE3BBD900432CFB /* data */,
 				B0DE1F262CE3BAA400432CFB /* AppDelegate.swift */,
 				B0DE1F282CE3BAA400432CFB /* SceneDelegate.swift */,
+				7A6F5F902CE4EFAA0015DEAF /* ContentView.swift */,
 				B0DE1F2A2CE3BAA400432CFB /* ViewController.swift */,
 				B0DE1F2C2CE3BAA400432CFB /* Main.storyboard */,
 				B0DE1F322CE3BAA400432CFB /* Assets.xcassets */,
@@ -135,6 +179,9 @@
 		B0DE1F432CE3BC2F00432CFB /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				7AF79D452CEA03CD00DD0C64 /* onBoarding */,
+				7A6F5F922CE4EFC00015DEAF /* signup */,
+				7A6F5F8B2CE4EEE80015DEAF /* forgetPassword */,
 				B0DE1F482CE3BC9B00432CFB /* signin */,
 			);
 			path = ui;
@@ -145,6 +192,7 @@
 			children = (
 				B0DE1F492CE3BCB300432CFB /* siginViewModel.swift */,
 				B0DE1F4B2CE3BCC700432CFB /* signinViewController.swift */,
+				7A6F5F892CE4EEAE0015DEAF /* signinView.swift */,
 			);
 			path = signin;
 			sourceTree = "<group>";
@@ -229,13 +277,21 @@
 				B0DE1F4E2CE3D4C200432CFB /* LoginRequest.swift in Sources */,
 				B0DE1F312CE3BAA400432CFB /* brichios.xcdatamodeld in Sources */,
 				B0DE1F452CE3BC7D00432CFB /* ApiService.swift in Sources */,
+				7AF79D472CEA03E800DD0C64 /* onBoardingView.swift in Sources */,
 				B0DE1F4A2CE3BCB300432CFB /* siginViewModel.swift in Sources */,
 				B0DE1F522CE3DB6B00432CFB /* UserRepository.swift in Sources */,
+				7AF79D492CEA042D00DD0C64 /* pageView.swift in Sources */,
 				B0DE1F502CE3D56C00432CFB /* LoginResponse.swift in Sources */,
+				7A6F5F8A2CE4EEAE0015DEAF /* signinView.swift in Sources */,
 				B0DE1F472CE3BC8F00432CFB /* User.swift in Sources */,
 				B0DE1F4C2CE3BCC700432CFB /* signinViewController.swift in Sources */,
+				7A6F5F8D2CE4EF050015DEAF /* forgetPasswordViewodel.swift in Sources */,
 				B0DE1F2B2CE3BAA400432CFB /* ViewController.swift in Sources */,
+				7A6F5F912CE4EFAA0015DEAF /* ContentView.swift in Sources */,
+				7A6F5F942CE4EFE00015DEAF /* signupView.swift in Sources */,
 				B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */,
+				7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */,
+				7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */,
 				B0DE1F292CE3BAA400432CFB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,7 +443,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = brichios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -415,7 +471,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = brichios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

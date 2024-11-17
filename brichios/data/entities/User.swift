@@ -3,5 +3,4 @@ struct User:Codable{
     var email : String
     var numTel : String
     var password : String
-    var role : String = "user"
 }

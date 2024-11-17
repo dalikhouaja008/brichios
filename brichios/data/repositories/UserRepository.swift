@@ -17,18 +17,22 @@ class UserRepository : ApiService {
                 }
         }
 
-        func login(request: LoginRequest, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
-            let url = baseURL + "auth/login"
-            AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default)
-                .responseDecodable(of: LoginResponse.self) { response in
-                    switch response.result {
-                    case .success(let loginResponse):
-                        completion(.success(loginResponse))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
+    func login(request: LoginRequest, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
+        let url = baseURL + "auth/login"
+        AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default)
+            .responseDecodable(of: LoginResponse.self) { response in
+                switch response.result {
+                case .success(let loginResponse):
+                    // Print the login response
+                    print("Login Successful: \(loginResponse)")
+                    completion(.success(loginResponse))
+                case .failure(let error):
+                    print("Error during login: \(error.localizedDescription)")
+                    completion(.failure(error))
                 }
-        }
+            }
+    }
+
 
         func loginWithBiometric(request: LoginRequest, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
             let url = baseURL + "auth/loginwithbiometric"
