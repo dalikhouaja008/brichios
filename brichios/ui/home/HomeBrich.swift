@@ -3,6 +3,7 @@
 //
 // Created by Mac Mini 1 on 20/11/2024.
 
+
 import SwiftUI
 
 struct HomeBrich: View {
@@ -35,15 +36,16 @@ struct HomeBrich: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Total Balance")
                                 .font(.headline)
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white) // White text for better contrast
                             Text("$\(String(format: "%.2f", totalBalance))")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .foregroundColor(.primary)
+                                .foregroundColor(.white) // White for main balance
                         }
                         .padding()
-                        .background(Color.blue.opacity(0.15))
+                        .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .topLeading, endPoint: .bottomTrailing)) // Gradient background
                         .cornerRadius(15)
+                        .shadow(radius: 10)
                         
                         // Wallets Section with Swipeable Cards
                         Text("My Wallets")
@@ -75,10 +77,10 @@ struct HomeBrich: View {
                             .padding(.top)
                         
                         HStack(spacing: 15) {
-                            QuickActionButton(icon: "arrow.up.circle.fill", label: "Send")
-                            QuickActionButton(icon: "arrow.down.circle.fill", label: "Receive")
-                            QuickActionButton(icon: "qrcode", label: "Scan")
-                            QuickActionButton(icon: "creditcard.fill", label: "Pay")
+                            QuickActionButton(icon: "arrow.up.circle.fill", label: "Send", backgroundColor: Color.green)
+                            QuickActionButton(icon: "arrow.down.circle.fill", label: "Receive", backgroundColor: Color.blue)
+                            QuickActionButton(icon: "qrcode", label: "Scan", backgroundColor: Color.orange)
+                            QuickActionButton(icon: "creditcard.fill", label: "Pay", backgroundColor: Color.red)
                         }
                         
                         // Recent Transactions Section
@@ -102,7 +104,7 @@ struct HomeBrich: View {
                 Text("Home")
             }
         }
-        .accentColor(.blue)
+        .accentColor(.blue) // Accent color for navigation bar and buttons
     }
 }
 
@@ -147,11 +149,15 @@ struct WalletRow: View {
         VStack(alignment: .leading) {
             Text(wallet.currency)
                 .font(.headline)
+                .foregroundColor(Color.blue) // Add a blue accent to wallet currency
             Text("\(wallet.symbol)\(String(format: "%.2f", wallet.balance))")
                 .font(.subheadline)
                 .foregroundColor(.gray)
         }
         .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
 
@@ -162,6 +168,7 @@ struct WalletDetailView: View {
         VStack {
             Text(wallet.currency)
                 .font(.title)
+                .foregroundColor(Color.blue) // Color the title
                 .padding()
             Text("Balance: \(wallet.symbol)\(String(format: "%.2f", wallet.balance))")
                 .font(.title2)
@@ -178,17 +185,21 @@ struct WalletDetailView: View {
 struct QuickActionButton: View {
     var icon: String
     var label: String
+    var backgroundColor: Color
     
     var body: some View {
         VStack {
             Image(systemName: icon)
                 .font(.largeTitle)
+                .foregroundColor(.white) // Make icons white
             Text(label)
                 .font(.caption)
+                .foregroundColor(.white) // Make text white
         }
         .frame(width: 80, height: 80)
-        .background(Color.blue.opacity(0.1))
+        .background(backgroundColor)
         .cornerRadius(15)
+        .shadow(radius: 5)
     }
 }
 
