@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42A291762CEE2E70005C10BD /* transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A291752CEE2E70005C10BD /* transaction.swift */; };
+		42A291782CEE2E7A005C10BD /* wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A291772CEE2E7A005C10BD /* wallet.swift */; };
+		42A2917B2CEE2EAC005C10BD /* HomeBrich.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A2917A2CEE2EAC005C10BD /* HomeBrich.swift */; };
 		B01FC6E62CE3D7760023D64F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01FC6E52CE3D7760023D64F /* ContentView.swift */; };
 		B01FC6E82CE3D8290023D64F /* ForgetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01FC6E72CE3D8290023D64F /* ForgetPasswordScreen.swift */; };
 		B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F262CE3BAA400432CFB /* AppDelegate.swift */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42A291752CEE2E70005C10BD /* transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transaction.swift; sourceTree = "<group>"; };
+		42A291772CEE2E7A005C10BD /* wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wallet.swift; sourceTree = "<group>"; };
+		42A2917A2CEE2EAC005C10BD /* HomeBrich.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrich.swift; sourceTree = "<group>"; };
 		B01FC6E52CE3D7760023D64F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B01FC6E72CE3D8290023D64F /* ForgetPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordScreen.swift; sourceTree = "<group>"; };
 		B0DE1F232CE3BAA400432CFB /* brichios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = brichios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +57,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42A291792CEE2E8D005C10BD /* home */ = {
+			isa = PBXGroup;
+			children = (
+				42A2917A2CEE2EAC005C10BD /* HomeBrich.swift */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		42A2917C2CEE30E0005C10BD /* model */ = {
+			isa = PBXGroup;
+			children = (
+				42A291772CEE2E7A005C10BD /* wallet.swift */,
+				42A291752CEE2E70005C10BD /* transaction.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		B0DE1F1A2CE3BAA400432CFB = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +112,7 @@
 		B0DE1F3D2CE3BBD900432CFB /* data */ = {
 			isa = PBXGroup;
 			children = (
+				42A2917C2CEE30E0005C10BD /* model */,
 				B0DE1F412CE3BC0B00432CFB /* repositories */,
 				B0DE1F402CE3BC0200432CFB /* network */,
 				B0DE1F3F2CE3BBFB00432CFB /* local */,
@@ -130,6 +154,7 @@
 		B0DE1F432CE3BC2F00432CFB /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				42A291792CEE2E8D005C10BD /* home */,
 				B0DE1F482CE3BC9B00432CFB /* signin */,
 			);
 			path = ui;
@@ -220,14 +245,17 @@
 			files = (
 				B0DE1F312CE3BAA400432CFB /* brichios.xcdatamodeld in Sources */,
 				B01FC6E82CE3D8290023D64F /* ForgetPasswordScreen.swift in Sources */,
+				42A2917B2CEE2EAC005C10BD /* HomeBrich.swift in Sources */,
 				B0DE1F452CE3BC7D00432CFB /* ApiService.swift in Sources */,
 				B0DE1F4A2CE3BCB300432CFB /* siginViewModel.swift in Sources */,
+				42A291782CEE2E7A005C10BD /* wallet.swift in Sources */,
 				B0DE1F472CE3BC8F00432CFB /* User.swift in Sources */,
 				B0DE1F4C2CE3BCC700432CFB /* signinViewController.swift in Sources */,
 				B01FC6E62CE3D7760023D64F /* ContentView.swift in Sources */,
 				B0DE1F2B2CE3BAA400432CFB /* ViewController.swift in Sources */,
 				B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */,
 				B0DE1F292CE3BAA400432CFB /* SceneDelegate.swift in Sources */,
+				42A291762CEE2E70005C10BD /* transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
