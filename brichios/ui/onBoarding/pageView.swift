@@ -26,11 +26,14 @@ struct PageView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .padding(.top, 20)
+                .multilineTextAlignment(.center)
 
             Text(description)
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .padding(.top, 10)
+                .padding(.horizontal, 20)
+                .multilineTextAlignment(.center)
         }
     }
 }

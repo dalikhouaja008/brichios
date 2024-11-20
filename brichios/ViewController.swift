@@ -10,7 +10,7 @@ import Combine
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var passwordField: UITextField!
+ /*   @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var mailField: UITextField!
    
     @IBOutlet weak var errorLabel: UILabel!
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     private func showError(_ message: String) {
             errorLabel.text = message
             errorLabel.isHidden = false
-        }
+        }*/
     
 }
 

@@ -2,8 +2,8 @@
 import Alamofire
 import Foundation
 
-class UserRepository : ApiService {
-    private let baseURL = "http://192.168.76.164:3000/"
+class UserRepository  {
+    private let baseURL = "http://172.18.1.239:3000/"
 
         func createUser(user: User, completion: @escaping (Result<User, Error>) -> Void) {
             let url = baseURL + "auth/signup"

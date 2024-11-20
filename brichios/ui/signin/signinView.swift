@@ -1,16 +1,17 @@
 import SwiftUI
 
-// Sign In View
+
 
 struct Login: View {
     @State private var mail = ""
     @State private var pass = ""
     @State private var isLoading = false
-    @State private var isRemembered = false
     @State private var loginSuccess = false
     @State private var showPassword = false
     @ObservedObject var viewModel: SigninViewModel
     @State private var navigateToHome = false
+    @EnvironmentObject var auth: Auth
+    @State private var isRemembered = false
     
     var body: some View {
         VStack {
@@ -81,6 +82,12 @@ struct Login: View {
                         .padding(.leading, 4)
                         .transition(.opacity)
                     }
+                    Toggle(isOn: $isRemembered) {
+                        Text("Remember Me")
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                    }
+                    .toggleStyle(CheckboxToggleStyle())
                 }
             }
             .padding(.vertical)
@@ -91,9 +98,9 @@ struct Login: View {
             .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
             .padding(.top, 25)
             .padding(.horizontal)
-            
+
             Button(action: {
-                validateAndLogin()
+                validateAndLogin() // Call your login function
             }) {
                 if isLoading {
                     ProgressView()
@@ -112,10 +119,19 @@ struct Login: View {
                         .shadow(radius: 15)
                 }
             }
-        }.fullScreenCover(isPresented: $navigateToHome) {
-            SignUp(viewModel:SignupViewModel(userRepository: UserRepository())) // Navigation vers Home()
+            .fullScreenCover(isPresented: $navigateToHome) {
+                HomeBrich() // Show the home screen after successful login
+            }
+            
+            // Show error message if login fails
+            if (viewModel.loginUiState.errorMessage != nil) {
+                Text("Login failed. Please try again.")
+                    .foregroundColor(.red)
+                    .padding(.top)
+            }
         }
     }
+    
     private func validateAndLogin() {
         // Réinitialiser les erreurs
         viewModel.resetErrors()
@@ -126,8 +142,7 @@ struct Login: View {
         // Si les deux sont valides, procéder à la connexion
         if isEmailValid && isPasswordValid {
             isLoading = true
-            viewModel.loginUser(email: mail, password: pass)
-            
+            viewModel.loginUser(email: mail, password: pass, isRemembered: isRemembered)
             // Observer le changement d'état de connexion
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.isLoading = false
@@ -138,7 +153,22 @@ struct Login: View {
             }
         }
     }
-    
+
+}
+struct CheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+            Spacer()
+            Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(configuration.isOn ? Color.blue : Color.gray)
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
+        }
+    }
 }
 
 
