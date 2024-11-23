@@ -11,8 +11,8 @@
 		42699A062CF1E6230022F7C5 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A052CF1E6230022F7C5 /* AlamofireDynamic */; };
 		42699A082CF1E9A00022F7C5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A072CF1E9A00022F7C5 /* Alamofire */; };
 		42699A0A2CF1E9A00022F7C5 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A092CF1E9A00022F7C5 /* AlamofireDynamic */; };
-		42699A0E2CF20F400022F7C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42699A0D2CF20F400022F7C5 /* Card.swift */; };
-		42699A102CF20F4C0022F7C5 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42699A0F2CF20F4C0022F7C5 /* Expense.swift */; };
+		42EC60D42CF23D6C005FD0A9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC60D32CF23D6C005FD0A9 /* Card.swift */; };
+		42EC60D62CF23D96005FD0A9 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC60D52CF23D96005FD0A9 /* Expense.swift */; };
 		7A6F5F8A2CE4EEAE0015DEAF /* signinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F892CE4EEAE0015DEAF /* signinView.swift */; };
 		7A6F5F8D2CE4EF050015DEAF /* forgetPasswordViewodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */; };
 		7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */; };
@@ -64,8 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		42699A0D2CF20F400022F7C5 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = "../../../../../walletui-main/WalletUI/Model/Card.swift"; sourceTree = "<group>"; };
-		42699A0F2CF20F4C0022F7C5 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Expense.swift; path = "../../../../../walletui-main/WalletUI/Model/Expense.swift"; sourceTree = "<group>"; };
+		42EC60D32CF23D6C005FD0A9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		42EC60D52CF23D96005FD0A9 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		7A6F5F892CE4EEAE0015DEAF /* signinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signinView.swift; sourceTree = "<group>"; };
 		7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordViewodel.swift; sourceTree = "<group>"; };
 		7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordView.swift; sourceTree = "<group>"; };
@@ -198,12 +198,12 @@
 		7AB16DC12CEE84A2001855CA /* Wallets_components */ = {
 			isa = PBXGroup;
 			children = (
-				42699A0F2CF20F4C0022F7C5 /* Expense.swift */,
-				42699A0D2CF20F400022F7C5 /* Card.swift */,
 				7AB16DBF2CEE8445001855CA /* WalletDetailView.swift */,
 				7AB16DC22CEE84D1001855CA /* QuickActionButton.swift */,
 				7AB16DC42CEE84F8001855CA /* WalletRow.swift */,
 				7AB16DC62CEE8579001855CA /* TransactionRow.swift */,
+				42EC60D32CF23D6C005FD0A9 /* Card.swift */,
+				42EC60D52CF23D96005FD0A9 /* Expense.swift */,
 			);
 			path = Wallets_components;
 			sourceTree = "<group>";
@@ -447,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42EC60D42CF23D6C005FD0A9 /* Card.swift in Sources */,
 				7AB16DC52CEE84F8001855CA /* WalletRow.swift in Sources */,
 				7AB16DE42CEEA464001855CA /* Account.swift in Sources */,
 				7AB16DBE2CEE83DF001855CA /* Wallet.swift in Sources */,
@@ -457,8 +458,8 @@
 				B0DE1F452CE3BC7D00432CFB /* ApiService.swift in Sources */,
 				7AF79D472CEA03E800DD0C64 /* onBoardingView.swift in Sources */,
 				B0DE1F4A2CE3BCB300432CFB /* siginViewModel.swift in Sources */,
+				42EC60D62CF23D96005FD0A9 /* Expense.swift in Sources */,
 				7AB16DA92CEE78E6001855CA /* ExchangeRateView.swift in Sources */,
-				42699A102CF20F4C0022F7C5 /* Expense.swift in Sources */,
 				7AB16DCC2CEE8832001855CA /* settingsView.swift in Sources */,
 				7AB16DAD2CEE7914001855CA /* ExchangeRateRepository.swift in Sources */,
 				7AB16DC32CEE84D1001855CA /* QuickActionButton.swift in Sources */,
@@ -489,7 +490,6 @@
 				B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */,
 				7AB16DE02CEEA386001855CA /* OTPViewModel.swift in Sources */,
 				7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */,
-				42699A0E2CF20F400022F7C5 /* Card.swift in Sources */,
 				7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */,
 				B0DE1F292CE3BAA400432CFB /* SceneDelegate.swift in Sources */,
 				7AB16DA62CEE7852001855CA /* ExchangeRate.swift in Sources */,
