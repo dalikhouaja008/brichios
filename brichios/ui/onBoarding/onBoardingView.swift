@@ -18,8 +18,7 @@ struct OnboardingView: View {
                 PageView(imageName: "welcome4", title:"Seamless Currency Exchange Solutions", description: "Fast, secure, and hassle-free currency exchange at competitive rates.")
                     .tag(2)
             }
-            .background(LinearGradient(gradient: Gradient(colors: [Color("Color"), Color("Color1"), Color("Color2")]), startPoint: .top, endPoint: .bottom))
-            .edgesIgnoringSafeArea(.all)
+           
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always)) // Indicateurs de page
             
             Spacer()
@@ -41,6 +40,7 @@ struct OnboardingView: View {
             .padding(.horizontal, 20) // Ajoute un espacement sur les côtés
             .padding(.bottom, 20)
             // Ajoute un espacement depuis le bas
-        }
+        } .background(LinearGradient(gradient: Gradient(colors: [Color("Color"), Color("Color1"), Color("Color2")]), startPoint: .top, endPoint: .bottom))
+            .edgesIgnoringSafeArea(.all)
     }
 }

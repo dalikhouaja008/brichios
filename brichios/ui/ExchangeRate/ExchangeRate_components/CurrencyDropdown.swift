@@ -17,13 +17,20 @@ struct CurrencyDropdown: View {
         Menu {
             ForEach(currencies, id: \.self) { currency in
                 Button(action: {
-                    selection = currency
+                    withAnimation {
+                        selection = currency
+                    }
                 }) {
-                    Text(currency)
+                    HStack {
+                        Text(currency)
+                        if selection == currency {
+                            Image(systemName: "checkmark")
+                        }
+                    }
                 }
             }
         } label: {
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 Text(title)
                     .font(.caption)
                     .foregroundColor(.gray)
@@ -34,6 +41,11 @@ struct CurrencyDropdown: View {
             .padding()
             .background(Color.gray.opacity(0.1))
             .cornerRadius(8)
+        }
+        .onAppear {
+            // Debug print
+            print("Available currencies: \(currencies)")
+            print("Current selection: \(selection)")
         }
     }
 }

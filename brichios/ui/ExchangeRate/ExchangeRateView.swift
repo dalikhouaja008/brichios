@@ -9,7 +9,7 @@ struct ExchangeRateView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: 5) {
                     // Currency Conversion Card
                     VStack(spacing: 16) {
                         // Currency Selection
@@ -21,8 +21,20 @@ struct ExchangeRateView: View {
                             )
                             .shadow(color: .gray.opacity(0.2), radius: 5)
                             
-                            Image(systemName: "arrow.left.arrow.right")
+                            Button(action: {
+                     
+                                //print("Avant swap - From: \(viewModel.uiStateCurrency.fromCurrency) To: \(viewModel.uiStateCurrency.toCurrency)")
+                                   viewModel.swapCurrencies()
+                                   //print("Après swap - From: \(viewModel.uiStateCurrency.fromCurrency) To: \(viewModel.uiStateCurrency.toCurrency)")
+                                viewModel.uiStateCurrency.isTNDtoOtherCurrency = !viewModel.uiStateCurrency.isTNDtoOtherCurrency
+                                
+                               // print( viewModel.uiStateCurrency.isTNDtoOtherCurrency)
+                                
+                            }) {
+                                Image(systemName: "arrow.left.arrow.right")
                                 .foregroundColor(.black.opacity(0.6))
+                                 .padding()
+                            }
                             
                             CurrencyDropdown(
                                 title: "To",
@@ -43,39 +55,64 @@ struct ExchangeRateView: View {
                         
                         // Convert Button
                         Button(action: {
-                            //viewModel.convertCurrency
-                        }) {
-                            Text("Convert")
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            Color(red: 0.2, green: 0.4, blue: 0.8),
-                                            Color(red: 0.3, green: 0.5, blue: 0.9)
-                                        ]),
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                        }
-                        .padding(.horizontal)
-                        .shadow(color: .blue.opacity(0.3), radius: 5, x: 0, y: 3)
+                            let amount = viewModel.uiStateCurrency.amount 
+                                    if viewModel.uiStateCurrency.isTNDtoOtherCurrency {
+                                        viewModel.calculateSellingRate(
+                                              currency: viewModel.uiStateCurrency.toCurrency,
+                                               amount: amount
+                                          )
+                                    } else {
+                                        viewModel.calculateBuyingRate(
+                                              currency: viewModel.uiStateCurrency.fromCurrency,
+                                              amount: amount
+                                            )
+                                      }
+                                   }) {
+                                        if (viewModel.uiStateCurrency.isLoading) {
+                                            ProgressView()
+                                                   .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                                    } else {
+                                                        Text("Convert")
+                                                            .fontWeight(.semibold)
+                                                    }
+                                                }
+                                                .frame(maxWidth: .infinity)
+                                                .padding()
+                                                .background(
+                                                    LinearGradient(
+                                                        gradient: Gradient(colors: [
+                                                            Color(red: 0.2, green: 0.4, blue: 0.8),
+                                                            Color(red: 0.3, green: 0.5, blue: 0.9)
+                                                        ]),
+                                                        startPoint: .leading,
+                                                        endPoint: .trailing
+                                                    )
+                                                )
+                                                .foregroundColor(.white)
+                                                .cornerRadius(12)
+                                                .disabled(viewModel.uiStateCurrency.isLoading)
+                                                .padding(.horizontal)
+                                                .shadow(color: .blue.opacity(0.3), radius: 5, x: 0, y: 3)
                         
-                        // Result
-                        Text("Converted Amount: \(viewModel.uiStateCurrency.convertedAmount)")
-                            .font(.title3)
-                            .fontWeight(.medium)
-                            .foregroundColor(.black.opacity(0.7))
-                    }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: .gray.opacity(0.2), radius: 10, x: 0, y: 5)
-                    .padding(.horizontal)
+                                                // Result
+                                               VStack(spacing: 8) {
+                                                 if let errorMessage = viewModel.uiStateCurrency.errorMessage {
+                                                      Text(errorMessage)
+                                                      .foregroundColor(.red)
+                                                      .multilineTextAlignment(.center)
+                                                  } else {
+                                                     Text("Converted Amount: \(viewModel.formatConvertedAmount(viewModel.uiStateCurrency.convertedAmount))")
+                                                          .font(.subheadline)
+                                                          .fontWeight(.medium)
+                                                          .foregroundColor(.black.opacity(0.7))
+                                                                                  }
+                                                                              }
+                                                                          }
+                                                                          .padding()
+                                                                          .background(Color.white)
+                                                                          .cornerRadius(15)
+                                                                          .shadow(color: .gray.opacity(0.2), radius: 10, x: 0, y: 5)
+                                                                          .padding(.horizontal)
                     
                     // Exchange Rates List
                     VStack {
@@ -102,9 +139,12 @@ struct ExchangeRateView: View {
                 .padding(.vertical)
             }
             .background(Color.gray.opacity(0.05))
+            .padding(.top, -65)
             .navigationTitle("B-Rich")
             .navigationBarTitleDisplayMode(.inline)
+           
         }
+       
         .onAppear {
             viewModel.fetchExchangeRates()
         }
