@@ -1,16 +1,8 @@
-//
-//  TransactionRow.swift
-//  brichios
-//
-//  Created by Mac Mini 2 on 20/11/2024.
-//
-
-import Foundation
 import SwiftUI
+
 struct TransactionRow: View {
     var transaction: Transaction
     
-    // DateFormatter to convert Date to a readable string
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .short

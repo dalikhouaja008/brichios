@@ -12,4 +12,5 @@ struct Wallet: Identifiable, Codable {
     var balance: Double
     var symbol: String
     var transactions: [Transaction]
+    var cardImage: String?
 }

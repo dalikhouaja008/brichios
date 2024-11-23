@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42699A042CF1E6230022F7C5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A032CF1E6230022F7C5 /* Alamofire */; };
+		42699A062CF1E6230022F7C5 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A052CF1E6230022F7C5 /* AlamofireDynamic */; };
+		42699A082CF1E9A00022F7C5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A072CF1E9A00022F7C5 /* Alamofire */; };
+		42699A0A2CF1E9A00022F7C5 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 42699A092CF1E9A00022F7C5 /* AlamofireDynamic */; };
+		42699A0E2CF20F400022F7C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42699A0D2CF20F400022F7C5 /* Card.swift */; };
+		42699A102CF20F4C0022F7C5 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42699A0F2CF20F4C0022F7C5 /* Expense.swift */; };
 		7A6F5F8A2CE4EEAE0015DEAF /* signinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F892CE4EEAE0015DEAF /* signinView.swift */; };
 		7A6F5F8D2CE4EF050015DEAF /* forgetPasswordViewodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */; };
 		7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */; };
@@ -14,7 +20,6 @@
 		7A6F5F942CE4EFE00015DEAF /* signupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F932CE4EFE00015DEAF /* signupView.swift */; };
 		7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */; };
 		7A8BBB652CECF0E00081BEE2 /* HomeBrich.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BBB642CECF0E00081BEE2 /* HomeBrich.swift */; };
-		7AB16D972CEE58FA001855CA /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 7AB16D962CEE58FA001855CA /* SwiftKeychainWrapper */; };
 		7AB16DA62CEE7852001855CA /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DA52CEE7852001855CA /* ExchangeRate.swift */; };
 		7AB16DA92CEE78E6001855CA /* ExchangeRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DA82CEE78E6001855CA /* ExchangeRateView.swift */; };
 		7AB16DAB2CEE78FC001855CA /* ExchangeRateModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DAA2CEE78FC001855CA /* ExchangeRateModelView.swift */; };
@@ -56,10 +61,11 @@
 		B0DE1F4E2CE3D4C200432CFB /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F4D2CE3D4C200432CFB /* LoginRequest.swift */; };
 		B0DE1F502CE3D56C00432CFB /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F4F2CE3D56C00432CFB /* LoginResponse.swift */; };
 		B0DE1F522CE3DB6B00432CFB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DE1F512CE3DB6B00432CFB /* UserRepository.swift */; };
-		B0DE1F552CE3DD4100432CFB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B0DE1F542CE3DD4100432CFB /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42699A0D2CF20F400022F7C5 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = "../../../../../walletui-main/WalletUI/Model/Card.swift"; sourceTree = "<group>"; };
+		42699A0F2CF20F4C0022F7C5 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Expense.swift; path = "../../../../../walletui-main/WalletUI/Model/Expense.swift"; sourceTree = "<group>"; };
 		7A6F5F892CE4EEAE0015DEAF /* signinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signinView.swift; sourceTree = "<group>"; };
 		7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordViewodel.swift; sourceTree = "<group>"; };
 		7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordView.swift; sourceTree = "<group>"; };
@@ -117,8 +123,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AB16D972CEE58FA001855CA /* SwiftKeychainWrapper in Frameworks */,
-				B0DE1F552CE3DD4100432CFB /* Alamofire in Frameworks */,
+				42699A082CF1E9A00022F7C5 /* Alamofire in Frameworks */,
+				42699A0A2CF1E9A00022F7C5 /* AlamofireDynamic in Frameworks */,
+				42699A042CF1E6230022F7C5 /* Alamofire in Frameworks */,
+				42699A062CF1E6230022F7C5 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +198,8 @@
 		7AB16DC12CEE84A2001855CA /* Wallets_components */ = {
 			isa = PBXGroup;
 			children = (
+				42699A0F2CF20F4C0022F7C5 /* Expense.swift */,
+				42699A0D2CF20F400022F7C5 /* Card.swift */,
 				7AB16DBF2CEE8445001855CA /* WalletDetailView.swift */,
 				7AB16DC22CEE84D1001855CA /* QuickActionButton.swift */,
 				7AB16DC42CEE84F8001855CA /* WalletRow.swift */,
@@ -374,8 +384,10 @@
 			);
 			name = brichios;
 			packageProductDependencies = (
-				B0DE1F542CE3DD4100432CFB /* Alamofire */,
-				7AB16D962CEE58FA001855CA /* SwiftKeychainWrapper */,
+				42699A032CF1E6230022F7C5 /* Alamofire */,
+				42699A052CF1E6230022F7C5 /* AlamofireDynamic */,
+				42699A072CF1E9A00022F7C5 /* Alamofire */,
+				42699A092CF1E9A00022F7C5 /* AlamofireDynamic */,
 			);
 			productName = brichios;
 			productReference = B0DE1F232CE3BAA400432CFB /* brichios.app */;
@@ -406,8 +418,7 @@
 			);
 			mainGroup = B0DE1F1A2CE3BAA400432CFB;
 			packageReferences = (
-				B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */,
-				7AB16D952CEE58FA001855CA /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				42699A022CF1E6230022F7C5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = B0DE1F242CE3BAA400432CFB /* Products */;
 			projectDirPath = "";
@@ -447,6 +458,7 @@
 				7AF79D472CEA03E800DD0C64 /* onBoardingView.swift in Sources */,
 				B0DE1F4A2CE3BCB300432CFB /* siginViewModel.swift in Sources */,
 				7AB16DA92CEE78E6001855CA /* ExchangeRateView.swift in Sources */,
+				42699A102CF20F4C0022F7C5 /* Expense.swift in Sources */,
 				7AB16DCC2CEE8832001855CA /* settingsView.swift in Sources */,
 				7AB16DAD2CEE7914001855CA /* ExchangeRateRepository.swift in Sources */,
 				7AB16DC32CEE84D1001855CA /* QuickActionButton.swift in Sources */,
@@ -477,6 +489,7 @@
 				B0DE1F272CE3BAA400432CFB /* AppDelegate.swift in Sources */,
 				7AB16DE02CEEA386001855CA /* OTPViewModel.swift in Sources */,
 				7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */,
+				42699A0E2CF20F400022F7C5 /* Card.swift in Sources */,
 				7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */,
 				B0DE1F292CE3BAA400432CFB /* SceneDelegate.swift in Sources */,
 				7AB16DA62CEE7852001855CA /* ExchangeRate.swift in Sources */,
@@ -700,34 +713,36 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7AB16D952CEE58FA001855CA /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+		42699A022CF1E6230022F7C5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.1;
-			};
-		};
-		B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.10.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7AB16D962CEE58FA001855CA /* SwiftKeychainWrapper */ = {
+		42699A032CF1E6230022F7C5 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7AB16D952CEE58FA001855CA /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
-			productName = SwiftKeychainWrapper;
-		};
-		B0DE1F542CE3DD4100432CFB /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 42699A022CF1E6230022F7C5 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		42699A052CF1E6230022F7C5 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42699A022CF1E6230022F7C5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		42699A072CF1E9A00022F7C5 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42699A022CF1E6230022F7C5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		42699A092CF1E9A00022F7C5 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42699A022CF1E6230022F7C5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 

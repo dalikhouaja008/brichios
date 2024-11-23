@@ -15,7 +15,7 @@ struct OnboardingView: View {
                     .tag(0) // Tag pour identifier la page
                 PageView(imageName: "welcome2", title: "Your Trusted Banking Partner", description: "Secure and reliable banking solutions designed for your success." )
                     .tag(1)
-                PageView(imageName: "welcome4", title:"Seamless Currency Exchange Solutions", description: "Fast, secure, and hassle-free currency exchange at competitive rates.")
+                PageView(imageName: "welcome3", title:"Seamless Currency Exchange Solutions", description: "Fast, secure, and hassle-free currency exchange at competitive rates.")
                     .tag(2)
             }
             .background(LinearGradient(gradient: Gradient(colors: [Color("Color"), Color("Color1"), Color("Color2")]), startPoint: .top, endPoint: .bottom))
