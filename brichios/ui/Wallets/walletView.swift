@@ -106,8 +106,3 @@ struct WalletView: View {
     
 }
 
-
-
-#Preview {
-    HomeBrich()
-}

@@ -153,6 +153,3 @@ struct ResetPasswordView: View {
     }
 }
 
-#Preview {
-    ProfileView()
-}

@@ -16,7 +16,7 @@ struct ListAccountsView: View {
                     Spacer()
 
                     // Add Account Button
-                    NavigationLink(destination: addAccountView()) {
+                    NavigationLink(destination: AddAccountView()) {
                         HStack {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title2)
@@ -172,7 +172,3 @@ struct AccountCardView: View {
 
 // Add Account View
 
-
-#Preview {
-    ListAccountsView()
-}
