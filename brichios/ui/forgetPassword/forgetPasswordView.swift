@@ -1,3 +1,9 @@
+//
+//  forgetPasswordView.swift
+//  brichios
+//
+//  Created by Mac Mini 2 on 13/11/2024.
+//
 import SwiftUI
 
 struct ForgotPasswordView: View {
@@ -113,4 +119,52 @@ struct ForgotPasswordView_Previews: PreviewProvider {
         ForgotPasswordView()
     }
 }
+/*import SwiftUI
+struct ForgotPasswordBottomSheet: View {
+        @Environment(\.dismiss) var dismiss
+        @State private var email: String = ""
 
+        var body: some View {
+            VStack(spacing: 20) {
+                Text("Reset Password")
+                    .font(.title2)
+                    .fontWeight(.bold)
+
+                Text("Enter your email address below, and we will send you instructions to reset your password.")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+
+                TextField("Email Address", text: $email)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(10)
+                    .keyboardType(.emailAddress)
+
+                Button(action: {
+                    // Reset password logic
+                    print("Password reset email sent to \(email)")
+                    dismiss() // Dismiss bottom sheet
+                }) {
+                    Text("Submit")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+
+                Button(action: {
+                    dismiss() // Dismiss bottom sheet
+                }) {
+                    Text("Cancel")
+                        .foregroundColor(.red)
+                }
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(radius: 10)
+        }
+    }*/
