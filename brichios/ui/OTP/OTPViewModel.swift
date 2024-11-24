@@ -35,4 +35,3 @@ class OTPViewModel: ObservableObject {
         return otp.joined().count == otp.count // Validate OTP length
     }
 }
-

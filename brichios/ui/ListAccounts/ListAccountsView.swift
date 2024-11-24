@@ -2,21 +2,18 @@ import SwiftUI
 
 struct ListAccountsView: View {
     @StateObject private var viewModel = ListAccountsViewModel()
-
     var body: some View {
-        NavigationView {
+        ScrollView {
             VStack(spacing: 20) {
                 // Header Section
                 HStack {
                     Text("Your Accounts")
-                        .font(.system(size: 28, weight: .bold))
+                        .font(.system(size: 20, weight: .bold))
                         .foregroundColor(Color.primary)
                         .padding(.top)
-
                     Spacer()
-
                     // Add Account Button
-                    NavigationLink(destination: AddAccountView()) {
+                    NavigationLink(destination: addAccountView()) {
                         HStack {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title2)
@@ -40,7 +37,7 @@ struct ListAccountsView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 .padding(.horizontal)
-
+                
                 // Horizontal Scrollable List of Accounts
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
@@ -56,18 +53,18 @@ struct ListAccountsView: View {
                     .padding(.horizontal)
                 }
                 .frame(height: 180)
-
+                
                 // Divider
                 Divider()
                     .padding(.vertical)
-
+                
                 // Account Details Section
                 if let selectedAccount = viewModel.selectedAccount {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Account Details")
                             .font(.headline)
                             .foregroundColor(.secondary)
-
+                        
                         // Balance Display
                         VStack(alignment: .leading) {
                             Text("Balance")
@@ -78,7 +75,7 @@ struct ListAccountsView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.green)
                         }
-
+                        
                         // Default Account Toggle
                         HStack {
                             Text("Default Account")
@@ -92,7 +89,7 @@ struct ListAccountsView: View {
                             ))
                             .labelsHidden()
                         }
-
+                        
                         // Top-Up Wallet Button
                         Button(action: {
                             print("Top-Up Wallet for \(selectedAccount.name)")
@@ -125,72 +122,55 @@ struct ListAccountsView: View {
                         .font(.headline)
                         .foregroundColor(.gray)
                 }
-
-                Spacer()
             }
             .background(Color(.systemGray6).ignoresSafeArea())
             .navigationTitle("Accounts")
+            .navigationBarTitleDisplayMode(.inline)
+            
         }
+        
     }
-}
-
-// Account Card View
-struct AccountCardView: View {
-    let account: CustomAccount
-    let isSelected: Bool
-
-    var body: some View {
-        VStack(spacing: 8) {
-            Text(account.name)
-                .font(.headline)
-                .fontWeight(isSelected ? .bold : .regular)
-                .foregroundColor(isSelected ? .white : .primary)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 20)
-                .frame(width: 150, height: 100)
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(colors: isSelected ? [Color.blue, Color.purple] : [Color.gray.opacity(0.2), Color.gray.opacity(0.3)]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+    
+    
+    // Account Card View
+    struct AccountCardView: View {
+        let account: CustomAccount
+        let isSelected: Bool
+        
+        var body: some View {
+            VStack(spacing: 8) {
+                Text(account.name)
+                    .font(.headline)
+                    .fontWeight(isSelected ? .bold : .regular)
+                    .foregroundColor(isSelected ? .white : .primary)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 20)
+                    .frame(width: 150, height: 100)
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: isSelected ? [Color.blue, Color.purple] : [Color.gray.opacity(0.2), Color.gray.opacity(0.3)]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                     )
-                )
-                .cornerRadius(15)
-                .shadow(color: isSelected ? Color.purple.opacity(0.5) : Color.clear, radius: 10, x: 0, y: 5)
-
-            if isSelected {
-                Text("\(account.balance, specifier: "%.2f") TND")
-                    .font(.subheadline)
-                    .foregroundColor(.black)
+                    .cornerRadius(15)
+                    .shadow(color: isSelected ? Color.purple.opacity(0.5) : Color.clear, radius: 10, x: 0, y: 5)
+                
+                if isSelected {
+                    Text("\(account.balance, specifier: "%.2f") TND")
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                }
             }
+            .padding(.vertical, 8)
+            .animation(.spring(), value: isSelected)
         }
-        .padding(.vertical, 8)
-        .animation(.spring(), value: isSelected)
     }
 }
 
 // Add Account View
-struct AddAccountView: View {
-    var body: some View {
-        VStack {
-            Text("Add New Account")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
 
-            Spacer()
-
-            Text("This is where you'll add your account details.")
-                .font(.headline)
-                .foregroundColor(.secondary)
-
-            Spacer()
-        }
-        .padding()
-    }
-}
 
 #Preview {
     ListAccountsView()
 }
-

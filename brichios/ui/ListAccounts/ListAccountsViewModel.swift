@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 class ListAccountsViewModel: ObservableObject {
@@ -43,4 +42,3 @@ class ListAccountsViewModel: ObservableObject {
         return ["Savings", "Checking", "Business"]
     }
 }
-

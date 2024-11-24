@@ -1,8 +1,11 @@
-//
-//  ApiService.swift
-//  brichios
-//
-//  Created by Apple Esprit on 12/11/2024.
-//
+import Alamofire
 
-import Foundation
+protocol ApiService{
+    
+    func createUser(user : User, completion: @escaping (Result<User, Error>)->Void)
+    func login(request : LoginRequest, completion: @escaping (Result<LoginResponse,Error>)->Void)
+    func loginWithBiometric(request : LoginRequest, completion: @escaping (Result<LoginResponse, Error>)->Void)
+    func fetchExchangeRates() async throws -> [ExchangeRate]
+    func calculateSellingRate(currency : String, amount: String, completion: @escaping  (Result<Float, Error>)->Void)
+    
+}

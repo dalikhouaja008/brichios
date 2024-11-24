@@ -98,4 +98,3 @@ struct OTPView_Previews: PreviewProvider {
         OTPView()
     }
 }
-

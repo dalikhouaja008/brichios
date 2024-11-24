@@ -25,4 +25,3 @@ class AddAccountViewModel: ObservableObject {
         return accountTypes
     }
 }
-
