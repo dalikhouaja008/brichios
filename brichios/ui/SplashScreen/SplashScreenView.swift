@@ -16,7 +16,7 @@ struct SplashScreenView: View {
     @StateObject private var biometricAuth = BiometricAuthManager()
     @AppStorage("rememberMe") private var rememberMe = false
     //@State private var rememberMe = UserDefaults.standard.bool(forKey: Auth.UserDefaultsKey.isRemembered.rawValue)
-    // Customise your SplashScreen here
+
     var body: some View {
         
         if isActive {
@@ -56,7 +56,7 @@ struct SplashScreenView: View {
                                 }
                             } else {
                                 // Si "Remember Me" n'est pas coché, activer le contenu après un délai.
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                                     withAnimation {
                                         self.isActive = true
                                     }
@@ -88,34 +88,4 @@ struct SplashScreenView_Previews: PreviewProvider {
 }
 
 
-/* .onAppear {
- if rememberMe {
-     biometricAuth.authenticateUser { success in
-         if success {
-             // Authentification réussie, procéder à la connexion automatique
-             auth.loggedIn = true
-             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                 withAnimation {
-                     self.isActive = true
-                 }
-             }
-         }
-     }
- }
-} .alert(item: Binding(
- get: { biometricAuth.biometricError.map { BiometricError(message: $0) } },
- set: { _ in biometricAuth.biometricError = nil }
-))
-{
- error in
- Alert(
-     title: Text("Erreur d'authentification"),
-     message: Text(error.message),
-     dismissButton: .default(Text("OK"))
- )
-} .frame(maxWidth: .infinity, maxHeight: .infinity)
- .background(Color("Color1"))
- .edgesIgnoringSafeArea(.all)
-}
-}
-}*/
+

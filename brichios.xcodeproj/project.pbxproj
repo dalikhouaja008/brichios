@@ -12,6 +12,7 @@
 		7A0004ED2CF350520071E4C0 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0004EC2CF350520071E4C0 /* SplashScreenViewController.swift */; };
 		7A0004F02CF355710071E4C0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0004EF2CF355710071E4C0 /* Home.swift */; };
 		7A0004F22CF358A20071E4C0 /* BiometricAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0004F12CF358A20071E4C0 /* BiometricAuthManager.swift */; };
+		7A0005172CF375600071E4C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A0005162CF375600071E4C0 /* Assets.xcassets */; };
 		7A6F5F8A2CE4EEAE0015DEAF /* signinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F892CE4EEAE0015DEAF /* signinView.swift */; };
 		7A6F5F8D2CE4EF050015DEAF /* forgetPasswordViewodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */; };
 		7A6F5F8F2CE4EF160015DEAF /* forgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */; };
@@ -69,6 +70,7 @@
 		7A0004EC2CF350520071E4C0 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		7A0004EF2CF355710071E4C0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		7A0004F12CF358A20071E4C0 /* BiometricAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthManager.swift; sourceTree = "<group>"; };
+		7A0005162CF375600071E4C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/brichios/brichios/Assets.xcassets; sourceTree = "<group>"; };
 		7A6F5F892CE4EEAE0015DEAF /* signinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signinView.swift; sourceTree = "<group>"; };
 		7A6F5F8C2CE4EF050015DEAF /* forgetPasswordViewodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordViewodel.swift; sourceTree = "<group>"; };
 		7A6F5F8E2CE4EF160015DEAF /* forgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetPasswordView.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				7A8BBB642CECF0E00081BEE2 /* HomeBrich.swift */,
 				B0DE1F2C2CE3BAA400432CFB /* Main.storyboard */,
 				B0DE1F322CE3BAA400432CFB /* logo.jpeg */,
+				7A0005162CF375600071E4C0 /* Assets.xcassets */,
 				B0DE1F342CE3BAA400432CFB /* LaunchScreen.storyboard */,
 				B0DE1F372CE3BAA400432CFB /* Info.plist */,
 				B0DE1F2F2CE3BAA400432CFB /* brichios.xcdatamodeld */,
@@ -461,6 +464,7 @@
 			files = (
 				B0DE1F362CE3BAA400432CFB /* LaunchScreen.storyboard in Resources */,
 				B0DE1F332CE3BAA400432CFB /* logo.jpeg in Resources */,
+				7A0005172CF375600071E4C0 /* Assets.xcassets in Resources */,
 				B0DE1F2E2CE3BAA400432CFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
