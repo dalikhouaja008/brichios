@@ -30,7 +30,18 @@ class AddAccountViewModel: ObservableObject {
         print("Validation succeeded for step \(currentStep).")
         return true
     }
-    
+    func isStepValid() -> Bool {
+           switch currentStep {
+           case 1:
+               return !name.isEmpty
+           case 2:
+               return !number.isEmpty
+           case 3:
+               return otp.allSatisfy { !$0.isEmpty }
+           default:
+               return false
+           }
+       }
     func saveAccount() {
         guard validateForm() else {
             print("Account not saved due to validation failure.")

@@ -1,10 +1,8 @@
 import SwiftUI
 
-
-
 struct AddAccountView: View {
     @StateObject private var viewModel = AddAccountViewModel()
-    @FocusState private var focusedIndex: Int?
+    @FocusState private var focusedIndex: Int? // Tracks the currently focused index
 
     var body: some View {
         NavigationView {
@@ -30,6 +28,7 @@ struct AddAccountView: View {
                 }
                 Spacer()
 
+                // Next Button
                 Button(action: {
                     if viewModel.currentStep < viewModel.totalSteps {
                         withAnimation {
@@ -43,19 +42,28 @@ struct AddAccountView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(LinearGradient(
-                            gradient: Gradient(colors: [Color.green, Color.blue]),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        ))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal, 20)
                 }
+                .background(
+                    Group {
+                        if viewModel.isStepValid() {
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color("Color"), Color("Color1"), Color("Color2")]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        } else {
+                            Color.gray
+                        }
+                    }
+                    .cornerRadius(10)
+                )
+                .foregroundColor(.white)
+                .padding(.horizontal, 20)
+                .disabled(!viewModel.isStepValid()) // Disable button if step is invalid
             }
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.white, Color.green.opacity(0.1)]),
+                    gradient: Gradient(colors: [Color.white, Color("Color1").opacity(0.1)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -141,7 +149,7 @@ struct StepView<Content: View>: View {
                         .font(.title3.bold())
                         .foregroundColor(isCurrentStep ? .white : .gray)
                         .frame(width: 40, height: 40)
-                        .background(isCurrentStep ? Color.green : Color.gray.opacity(0.3))
+                        .background(isCurrentStep ? Color("Color2") : Color.gray.opacity(0.3))
                         .clipShape(Circle())
                     if !isCurrentStep {
                         Spacer()
@@ -165,9 +173,9 @@ struct StepView<Content: View>: View {
             }
         }
         .padding()
-        .background(isCurrentStep ? Color.green.opacity(0.1) : Color.clear)
+        .background(isCurrentStep ? Color("Color1").opacity(0.3) : Color.clear)
         .cornerRadius(12)
-        .shadow(color: isCurrentStep ? Color.green.opacity(0.3) : .clear, radius: 6, x: 0, y: 4)
+        .shadow(color: isCurrentStep ? Color("Color2").opacity(0.3) : .clear, radius: 6, x: 0, y: 4)
         .animation(.easeInOut, value: isCurrentStep)
     }
 }
@@ -175,12 +183,12 @@ struct StepView<Content: View>: View {
 struct OTPDigitField: View {
     @Binding var digit: String
     let index: Int
-    var focusedIndex: FocusState<Int?>.Binding  // Changed to use FocusState.Binding
+    var focusedIndex: FocusState<Int?>.Binding  // FocusState binding to manage focus
 
     var body: some View {
         TextField("", text: $digit)
             .keyboardType(.numberPad)
-            .frame(width: 40, height: 50)
+            .frame(width: 30, height: 40)
             .multilineTextAlignment(.center)
             .background(Color.gray.opacity(0.1))
             .cornerRadius(8)
@@ -194,8 +202,10 @@ struct OTPDigitField: View {
                     digit = String(newValue.prefix(1))
                 }
 
-                if !newValue.isEmpty {
-                    focusedIndex.wrappedValue = index + 1
+                if newValue.isEmpty {
+                    focusedIndex.wrappedValue = index > 0 ? index - 1 : nil // Move back when empty
+                } else {
+                    focusedIndex.wrappedValue = index < 5 ? index + 1 : nil // Move forward
                 }
             }
     }
