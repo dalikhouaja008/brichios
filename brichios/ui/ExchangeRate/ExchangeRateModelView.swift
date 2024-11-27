@@ -7,24 +7,8 @@
 
 import Foundation
 
-struct CurrencyUiState {
-    var isLoading = false
-    var availableCurrencies = ["TND", "USD", "EUR", "GBP", "JPY", "SAR"]
-    var fromCurrencyExpanded = false
-    var toCurrencyExpanded = false
-    var convertedAmount: Double = 0.0
-    var fromCurrency: String = "TND"
-    var toCurrency: String = "EUR"
-    var amount: String = "0.0"
-    var isTNDtoOtherCurrency : Bool = true
-    var errorMessage: String?
-}
 
-struct ExchangeRateUiState {
-    var isLoading = false
-    var exchangeRates: [ExchangeRate]?
-    var errorMessage: String?
-}
+
 
 class ExchangeRateViewModel: ObservableObject {
     @Published var uiState = ExchangeRateUiState()
@@ -86,44 +70,6 @@ class ExchangeRateViewModel: ObservableObject {
     
     
     
-    func calculateSellingRate(currency: String, amount: String) {
-        Task {
-            await MainActor.run {
-                self.uiStateCurrency.isLoading = true
-            }
-            do {
-                let result = try await repository.getSellingRate(currency: currency, amount: amount)
-                await MainActor.run {
-                    self.uiStateCurrency.convertedAmount = result
-                    self.uiStateCurrency.isLoading = false
-                }
-            } catch {
-                await MainActor.run {
-                    self.uiStateCurrency.errorMessage = error.localizedDescription
-                    self.uiStateCurrency.isLoading = false
-                }
-            }
-        }
-    }
-    
-    func calculateBuyingRate(currency: String, amount: String) {
-        Task {
-            await MainActor.run {
-                self.uiStateCurrency.isLoading = true
-            }
-            do {
-                let result = try await repository.getBuyingRate(currency: currency, amount: amount)
-                await MainActor.run {
-                    self.uiStateCurrency.convertedAmount = result
-                    self.uiStateCurrency.isLoading = false
-                }
-            } catch {
-                await MainActor.run {
-                    self.uiStateCurrency.errorMessage = error.localizedDescription
-                    self.uiStateCurrency.isLoading = false
-                }
-            }
-        }
-    }
+   
     
 }

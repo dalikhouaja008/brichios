@@ -31,7 +31,8 @@ struct HomeBrich: View {
                         // Page Accueil
                         ExchangeRateView()
                             .tag(Tab.house)
-                        
+                        CurrencyConverterView()
+                            .tag(Tab.currencyConvert)
                         WalletView()
                            .tag(Tab.wallet)
                         
