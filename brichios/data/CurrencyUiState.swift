@@ -1,6 +1,6 @@
 struct CurrencyUiState {
     var isLoading = false
-    var availableCurrencies = ["TND", "USD", "EUR", "GBP", "JPY", "SAR"]
+    var availableCurrencies = ["", "USD", "EUR", "GBP", "JPY", "SAR"]
     var fromCurrencyExpanded = false
     var toCurrencyExpanded = false
     var convertedAmount: Double = 0.0

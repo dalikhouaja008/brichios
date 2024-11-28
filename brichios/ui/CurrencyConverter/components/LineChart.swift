@@ -6,11 +6,11 @@ import Charts
 
 struct LineChartComponent: View {
     @ObservedObject var viewModel: CurrencyConverterViewModel
-    let toCurrency: String
+    @Binding var toCurrency: String
     
     var body: some View {
         VStack {
-            Text("Prediction for \(toCurrency)")
+            Text("Prediction for \(toCurrency) for the next 7 days")
                 .font(.headline)
                 .padding(.bottom, 10)
             
@@ -33,10 +33,8 @@ struct LineChartComponent: View {
                 }
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .day)) { value in
-                        // Essayer de convertir la valeur en chaîne
                         if let dateString = value.as(String.self) {
-                            // Utiliser directement la date formatée venant du backend
-                            AxisValueLabel(dateString)  // Afficher la date telle quelle
+                            AxisValueLabel(dateString)
                         }
                     }
                 }
@@ -57,12 +55,18 @@ struct LineChartComponent: View {
         .cornerRadius(15)
         .shadow(color: .gray.opacity(0.2), radius: 10, x: 0, y: 5)
         .onAppear {
-            let currentDate = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            viewModel.loadPredictions(date: dateFormatter.string(from: currentDate), currencies: [toCurrency])
+            loadPredictions()
         }
-        
+        .onChange(of: toCurrency) { _ in
+            loadPredictions()
+        }
+    }
+    
+    private func loadPredictions() {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        viewModel.loadPredictions(date: dateFormatter.string(from: currentDate), currencies: [toCurrency])
     }
 }
 

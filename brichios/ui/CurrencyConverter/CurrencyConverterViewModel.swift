@@ -147,4 +147,30 @@ class CurrencyConverterViewModel: ObservableObject {
     }
 }
 
-
+extension CurrencyConverterViewModel {
+    func formatConvertedAmount(_ amount: Double?) -> String {
+        guard let amount = amount else { return "N/A" }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        formatter.currencyCode = uiStateCurrency.toCurrency
+        
+        // Try to get localized currency symbol
+        switch uiStateCurrency.toCurrency {
+        case "USD":
+            formatter.currencySymbol = "$"
+        case "EUR":
+            formatter.currencySymbol = "€"
+        case "GBP":
+            formatter.currencySymbol = "£"
+        case "TND":
+            formatter.currencySymbol = "DT"
+        default:
+            formatter.currencySymbol = uiStateCurrency.toCurrency
+        }
+        
+        return formatter.string(from: NSNumber(value: amount)) ?? "Error"
+    }
+}

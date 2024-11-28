@@ -99,9 +99,9 @@ struct CurrencyConverterView: View {
                                     .multilineTextAlignment(.center)
                             } else {
                                 Text("Converted Amount: \(viewModel.formatConvertedAmount(viewModel.uiStateCurrency.convertedAmount))")
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.black.opacity(0.7))
+                                    .font(.headline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
                             }
                         }
                     }
@@ -115,7 +115,7 @@ struct CurrencyConverterView: View {
                     
                     LineChartComponent(
                         viewModel: viewModel,
-                        selectedCurrency: $viewModel.uiStateCurrency.toCurrency // 
+                        toCurrency: $viewModel.uiStateCurrency.toCurrency
                     )
                 }
                 .padding(.vertical)

@@ -9,7 +9,7 @@ import SwiftUI
 
 enum Tab: String, CaseIterable {
     case house
-    case currencyConvert = "arrow.right.arrow.left"
+    case currencyConvert = "square.stack.3d.down.right"
     case wallet = "banknote"
     case person
     case bank = "building.columns"
