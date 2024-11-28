@@ -8,8 +8,9 @@
 import SwiftUI
 
 enum Tab: String, CaseIterable {
-    case house          // "house" existe
-    case wallet = "banknote" 
+    case house
+    case currencyConvert = "square.stack.3d.down.right"
+    case wallet = "banknote"
     case person
     case bank = "building.columns"
     case gearshape
@@ -21,10 +22,13 @@ struct CustomBottomBar: View {
     private var fillImage: String {
         selectedTab.rawValue + ".fill"
     }
+    
     private var tabColor: Color {
         switch selectedTab {
         case .house:
             return .blue
+        case .currencyConvert:
+            return .brown
         case .wallet:
             return .indigo
         case .person:
