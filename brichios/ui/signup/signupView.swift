@@ -7,6 +7,7 @@ struct SignUp : View {
     @State var pass = ""
     @State var repass = ""
     @State var passwordError = ""
+    @State var confirmPasswordError = ""
     @State var usernameError = ""
     @State var mailerror = ""
     @State private var showPassword: Bool = false
@@ -181,6 +182,16 @@ struct SignUp : View {
                        //.frame(width:UIApplication.shared.windows.first?.bounds.width ?? UIScreen.main.bounds.width -100 )
                        //.background(Color.red).cornerRadius(8).shadow(radius :10 )
                 }.background(Color.red).cornerRadius(8).shadow(radius :10 )
+                    .alert(isPresented: .constant(viewModel.signUpUiState.isSignedUp && viewModel.signUpUiState.successMessage != nil)) {
+                                   Alert(
+                                       title: Text("Succès"),
+                                       message: Text(viewModel.signUpUiState.successMessage ?? ""),
+                                       dismissButton: .default(Text("OK")) {
+                                           // Réinitialiser l'état après avoir affiché l'alerte
+                                           viewModel.signUpUiState.successMessage = nil
+                                       }
+                                   )
+                               }
             }
             // Navigation vers la page d'accueil après l'inscription réussie
             //.fullScreenCover(isPresented:$navigateToHome){
@@ -198,9 +209,10 @@ struct SignUp : View {
         let isPasswordValid = viewModel.validatePassword(pass)
         let isPhoneValid = viewModel.validatePhoneNumber(phone)
         let isUsernameValid = viewModel.validateUsername(username)
+        let isConfirmPasswordValid = viewModel.validateConfirmPassword(password: pass, confirmPassword: repass)
         
         // Si les deux sont valides, procéder à la connexion
-        if isEmailValid && isPasswordValid && isPhoneValid && isUsernameValid {
+        if isEmailValid && isPasswordValid && isPhoneValid && isUsernameValid && isConfirmPasswordValid {
             isLoading = true
             var newUser = User(name: username, email: mail, numTel: phone, password: pass)
             viewModel.signup(newUser: newUser)

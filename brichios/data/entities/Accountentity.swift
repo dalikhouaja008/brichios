@@ -1,16 +1,8 @@
-//
-//  Account.swift
-//  brichios
-//
-//  Created by Mac Mini 2 on 21/11/2024.
-//
-
 import Foundation
 
-struct Account: Identifiable {
+struct AccountEntity: Identifiable {
     let id = UUID()
-    var name: String
+    var nickname: String
     var number: String
     var type: String
-    
 }

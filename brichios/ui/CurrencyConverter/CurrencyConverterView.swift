@@ -8,6 +8,12 @@ struct CurrencyConverterView: View {
             ScrollView {
                 VStack(spacing: 5) {
                     // Currency Conversion Card
+                    Text("Currency converter ")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .padding(.top, 10) // Reduced from 20
+                        .multilineTextAlignment(.leading)
                     VStack(spacing: 16) {
                         // Currency Selection
                         HStack(spacing: 12) {

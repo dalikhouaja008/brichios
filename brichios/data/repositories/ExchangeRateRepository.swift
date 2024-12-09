@@ -24,5 +24,20 @@ class ExchangeRateRepository {
         }
     }
     
+    func fetchNews() async throws -> [NewsItem] {
+        let url = baseURL + "news"
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(url)
+                .responseDecodable(of: [NewsItem].self) { response in
+                    switch response.result {
+                    case .success(let news):
+                        continuation.resume(returning: news)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+    
 
 }

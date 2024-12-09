@@ -10,11 +10,24 @@ import SwiftUI
 struct ExchangeRateRow: View {
     let rate: ExchangeRate
     
+    // Date formatter to remove time
+    private var formattedDate: String {
+        let isoFormatter = ISO8601DateFormatter()
+        let displayFormatter = DateFormatter()
+        displayFormatter.dateFormat = "dd MMM yyyy"
+        
+        if let date = isoFormatter.date(from: rate.date) {
+            return displayFormatter.string(from: date)
+        }
+        return rate.date
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(rate.designation)
                     .font(.headline)
+                    .foregroundColor(.blue)
                 Spacer()
                 Text(rate.code)
                     .font(.subheadline)
@@ -28,6 +41,7 @@ struct ExchangeRateRow: View {
                         .foregroundColor(.gray)
                     Text(rate.buyingRate)
                         .font(.body)
+                        .foregroundColor(.green)
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
@@ -36,6 +50,7 @@ struct ExchangeRateRow: View {
                         .foregroundColor(.gray)
                     Text(rate.sellingRate)
                         .font(.body)
+                        .foregroundColor(.red)
                 }
             }
             
@@ -43,15 +58,20 @@ struct ExchangeRateRow: View {
                 .font(.caption)
                 .foregroundColor(.gray)
             
-            Text("Date: \(rate.date)")
+            Text("Date: \(formattedDate)")
                 .font(.caption)
-                .foregroundColor(.gray)
+                .foregroundColor(.purple)
         }
         .padding()
-        .background(Color.white)
-        .cornerRadius(8)
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [Color.white, Color.blue.opacity(0.1)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
+        .cornerRadius(12)
+        .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
         .padding(.horizontal)
     }
 }
-
-

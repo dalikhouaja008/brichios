@@ -4,15 +4,16 @@
 //
 //  Created by Mac Mini 2 on 20/11/2024.
 //
-
 import SwiftUI
 
 struct QuickActionButton: View {
     var icon: String
-        var label: String
-        var backgroundColor: Color
+    var label: String
+    var backgroundColor: Color
+    var action: () -> Void // Closure pour l'action à effectuer
 
-        var body: some View {
+    var body: some View {
+        Button(action: action) { // Utilisation d'un bouton pour gérer l'action
             VStack {
                 Image(systemName: icon)
                     .resizable()
@@ -28,4 +29,6 @@ struct QuickActionButton: View {
             }
             .frame(maxWidth: .infinity)
         }
+        .buttonStyle(PlainButtonStyle()) // Style du bouton
     }
+}
