@@ -5,7 +5,8 @@ class ListAccountsViewModel: ObservableObject {
         CustomAccount(name: "Account 1", balance: 4500, isDefault: true),
         CustomAccount(name: "Account 2", balance: 3200, isDefault: false),
         CustomAccount(name: "Account 3", balance: 2750, isDefault: false),
-        CustomAccount(name: "Account 4", balance: 8550, isDefault: false)
+        CustomAccount(name: "Account 4", balance: 8550, isDefault: false),
+        CustomAccount(name: "Account 5", balance: 866550, isDefault: false)
     ]
     
     @Published var selectedAccount: CustomAccount? {

@@ -11,9 +11,9 @@ enum Tab: String, CaseIterable {
     case house
     case currencyConvert = "square.stack.3d.down.right"
     case wallet = "banknote"
-    case person
     case bank = "building.columns"
-    case gearshape
+    case person
+    //case gearshape
 }
 
 
@@ -31,12 +31,12 @@ struct CustomBottomBar: View {
             return .brown
         case .wallet:
             return .indigo
-        case .person:
-            return .purple
         case .bank:
             return .green
-        case .gearshape:
-            return .orange
+        case .person:
+            return .purple
+        //case .gearshape:
+            //return .orange
         }
     }
     

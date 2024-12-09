@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 struct WalletDetailView: View {
-    var wallet: Wallet
+    var wallet: WalletSolana
     
     var body: some View {
         VStack {
@@ -16,7 +16,7 @@ struct WalletDetailView: View {
                 .font(.title)
                 .foregroundColor(Color.blue) // Color the title
                 .padding()
-            Text("Balance: \(wallet.symbol)\(String(format: "%.2f", wallet.balance))")
+            Text("Balance: \(wallet.currency)\(String(format: "%.2f", wallet.balance))")
                 .font(.title2)
                 .foregroundColor(.gray)
                 .padding(.bottom)

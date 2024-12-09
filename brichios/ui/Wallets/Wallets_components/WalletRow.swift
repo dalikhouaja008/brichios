@@ -7,24 +7,25 @@
 import SwiftUI
 
 struct WalletRow: View {
-    var wallet: Wallet
+    var wallet: WalletSolana
 
     var body: some View {
         ZStack {
-            if let cardImage = wallet.cardImage {
-                Image(cardImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 200)
-                    .clipped()
-            }
+            Image("card4")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
 
             VStack(alignment: .leading) {
                 Text(wallet.currency)
                     .font(.headline)
                     .foregroundColor(.white)
 
-                Text("\(wallet.symbol)\(String(format: "%.2f", wallet.balance))")
+                Text("\(String(format: "%.3f", wallet.balance)) SOL")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                Text("\(String(format: "%.3f", wallet.originalAmount))\(wallet.currency)")
                     .font(.subheadline)
                     .foregroundColor(.white)
             }
@@ -35,14 +36,4 @@ struct WalletRow: View {
     }
 }
 
-struct WalletRow_Previews: PreviewProvider {
-    static var previews: some View {
-        WalletRow(wallet: Wallet(
-            currency: "Euro",
-            balance: 1000.50,
-            symbol: "€",
-            transactions: [],
-            cardImage: "card4"
-        ))
-    }
-}
+

@@ -6,14 +6,17 @@
 //
 
 import Foundation
-
-
-
-
+// News State
+enum NewsState {
+    case loading
+    case success([NewsItem])
+    case error(String)
+}
 class ExchangeRateViewModel: ObservableObject {
     @Published var uiState = ExchangeRateUiState()
     @Published var uiStateCurrency = CurrencyUiState()
-    
+    @Published var newsState: NewsState = .loading
+    @Published var currentNewsPage = 0
     private let repository = ExchangeRateRepository()
     
     func fetchExchangeRates() {
@@ -34,6 +37,21 @@ class ExchangeRateViewModel: ObservableObject {
             }
         }
     }
+    
+    func fetchNews() {
+           Task {
+               do {
+                   let news = try await repository.fetchNews()
+                   DispatchQueue.main.async {
+                       self.newsState = .success(news)
+                   }
+               } catch {
+                   DispatchQueue.main.async {
+                       self.newsState = .error(error.localizedDescription)
+                   }
+               }
+           }
+       }
     
 
     

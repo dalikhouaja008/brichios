@@ -76,8 +76,8 @@ struct AddAccountView: View {
 
     private func stepTitle(for step: Int) -> String {
         switch step {
-        case 1: return "Account Name"
-        case 2: return "Account Number"
+        case 1: return "Account RIB"
+        case 2: return "Account Nickname"
         case 3: return "Enter OTP"
         default: return ""
         }
@@ -87,7 +87,8 @@ struct AddAccountView: View {
     private func stepContent(for step: Int) -> some View {
         switch step {
         case 1:
-            TextField("Enter Account Name", text: $viewModel.name)
+            TextField("Enter Account RIB", text: $viewModel.rib)
+                .keyboardType(.numberPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.top, 10)
                 .onTapGesture {
@@ -95,8 +96,7 @@ struct AddAccountView: View {
                 }
 
         case 2:
-            TextField("Enter Account Number", text: $viewModel.number)
-                .keyboardType(.numberPad)
+            TextField("Enter Account Nickname", text: $viewModel.nickname)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.top, 10)
                 .onTapGesture {

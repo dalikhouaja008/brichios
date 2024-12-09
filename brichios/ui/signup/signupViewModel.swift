@@ -12,26 +12,30 @@ struct SignUpUiState {
     var isSignedUp: Bool
     var user: User?
     var errorMessage: String?
+    var successMessage: String?
     
     init(
         isLoading: Bool = false,
         isSignedUp : Bool = false,
         user: User? = nil,
-        errorMessage: String? = nil
+        errorMessage: String? = nil,
+        successMessage: String? = nil
     ) {
         self.isLoading = isLoading
         self.isSignedUp = isSignedUp
         self.user = user
         self.errorMessage = errorMessage
+        self.successMessage = successMessage
     }
 }
 class SignupViewModel: ObservableObject {
     private let userRepository: UserRepository
-    @Published private(set) var signUpUiState = SignUpUiState()
+    @Published var signUpUiState = SignUpUiState()
     @Published var passwordError: String = ""
     @Published var emailError: String = ""
     @Published var phoneError: String = ""
     @Published var usernameError: String = ""
+    @Published var confirmPasswordError: String = ""
     
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
@@ -52,7 +56,8 @@ class SignupViewModel: ObservableObject {
                        self.signUpUiState = SignUpUiState(
                            isLoading: false,
                            isSignedUp: true,
-                           user: createdUser
+                           user: createdUser,
+                           successMessage: "Inscription réussie ! Bienvenue, \(createdUser.name) !"
                        )
                        print("Signup successful - User:", createdUser)
                        
@@ -122,6 +127,19 @@ class SignupViewModel: ObservableObject {
             return false
         }
         usernameError = ""
+        return true
+    }
+    
+    func validateConfirmPassword(password: String, confirmPassword: String) -> Bool {
+        if confirmPassword.isEmpty {
+            confirmPasswordError = "Confirm password field is empty"
+            return false
+        }
+        if password != confirmPassword {
+            confirmPasswordError = "Passwords do not match"
+            return false
+        }
+        confirmPasswordError = ""
         return true
     }
     
