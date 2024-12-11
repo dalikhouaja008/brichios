@@ -27,7 +27,9 @@ class WalletRepository {
         print("Requesting wallets with token: \(token)")
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(token)"
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
         ]
         
         return try await withCheckedThrowingContinuation { continuation in
@@ -35,7 +37,7 @@ class WalletRepository {
                 .responseData { response in
                     
                     // Log the response code
-                    if let statusCode = response.response?.statusCode {
+                   /* if let statusCode = response.response?.statusCode {
                         print("Response Status Code: \(statusCode)")
                     }
                     
@@ -44,7 +46,7 @@ class WalletRepository {
                        let bodyString = String(data: requestBody, encoding: .utf8) {
                         print("Request Body: \(bodyString)")
                         
-                    }
+                    }*/
                     
                     switch response.result {
                     case .success(let data):
@@ -68,6 +70,47 @@ class WalletRepository {
                 }
         }
     }
-}
+    
+    func convertCurrency(amount: Double, fromCurrency: String) async throws -> WalletSolana {
+        let url = baseURL + "solana/convert-currency"
+        
+        guard let token = Auth.shared.getAccessToken() else {
+            throw NetworkError.unauthorized
+        }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
+        
+        // Créer un dictionnaire JSON pour les paramètres
+        let parameters: [String: Any] = [
+            "amount": amount,
+            "fromCurrency": fromCurrency
+        ]
+        
+        // Effectuer la requête en envoyant les paramètres sous forme de JSON
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+                .responseDecodable(of: WalletSolana.self) { response in
+                    if let statusCode = response.response?.statusCode {
+                        print("Response Status Code: \(statusCode)")
+                    }
+                    // Log the request body (if applicable)
+                    if let requestBody = response.request?.httpBody,
+                       let bodyString = String(data: requestBody, encoding: .utf8) {
+                        print("Request Body: \(bodyString)")
+                    }
+                    switch response.result {
+                    case .success(let wallet):
+                        continuation.resume(returning: wallet)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+
+  }
 
 

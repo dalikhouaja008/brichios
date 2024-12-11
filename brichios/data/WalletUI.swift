@@ -6,8 +6,10 @@
 //
 
 import Foundation
-struct WalletUI{
-    var isLoading = false
-    var wallets: [WalletSolana]?
+struct WalletUI {
+    var wallets: [WalletSolana] = []
+    var isLoading: Bool = false
     var errorMessage: String?
+    var convertedWallet: WalletSolana?
+    var conversionError: String?
 }

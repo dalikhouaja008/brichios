@@ -52,6 +52,7 @@
 		7AB16DE02CEEA386001855CA /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DDF2CEEA386001855CA /* OTPViewModel.swift */; };
 		7AB16DE42CEEA464001855CA /* Accountentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DE32CEEA464001855CA /* Accountentity.swift */; };
 		7AB16DE62CEEA488001855CA /* CustomAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DE52CEEA488001855CA /* CustomAccount.swift */; };
+		7ADDF78E2D09DAEB00CD6172 /* AlimentDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADDF78D2D09DAEB00CD6172 /* AlimentDialogView.swift */; };
 		7AE95D112D0108750067E558 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE95D102D0108750067E558 /* AccountRepository.swift */; };
 		7AE95D132D010B9B0067E558 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE95D122D010B9B0067E558 /* Account.swift */; };
 		7AEF60DD2CF77A2100CFA05A /* CurrencyConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF60DC2CF77A2100CFA05A /* CurrencyConverterView.swift */; };
@@ -130,6 +131,7 @@
 		7AB16DDF2CEEA386001855CA /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		7AB16DE32CEEA464001855CA /* Accountentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accountentity.swift; sourceTree = "<group>"; };
 		7AB16DE52CEEA488001855CA /* CustomAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAccount.swift; sourceTree = "<group>"; };
+		7ADDF78D2D09DAEB00CD6172 /* AlimentDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentDialogView.swift; sourceTree = "<group>"; };
 		7AE95D102D0108750067E558 /* AccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRepository.swift; sourceTree = "<group>"; };
 		7AE95D122D010B9B0067E558 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7AEF60DC2CF77A2100CFA05A /* CurrencyConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		7A29B0972D077F95001B94B3 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
+				7ADDF78D2D09DAEB00CD6172 /* AlimentDialogView.swift */,
 				7A29B0982D077FAA001B94B3 /* GenerateQrCode.swift */,
 			);
 			path = Alerts;
@@ -596,6 +599,7 @@
 				7AB16DC32CEE84D1001855CA /* QuickActionButton.swift in Sources */,
 				7AB16DBA2CEE833F001855CA /* walletView.swift in Sources */,
 				7AB16DDE2CEEA35F001855CA /* OTPView.swift in Sources */,
+				7ADDF78E2D09DAEB00CD6172 /* AlimentDialogView.swift in Sources */,
 				7AB16DB22CEE81EE001855CA /* ExchangeRateRow.swift in Sources */,
 				7A0004E62CF3270D0071E4C0 /* CustomBottomBar.swift in Sources */,
 				7AB16DAB2CEE78FC001855CA /* ExchangeRateModelView.swift in Sources */,
