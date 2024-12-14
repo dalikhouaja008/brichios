@@ -14,6 +14,7 @@ class CurrencyConverterViewModel: ObservableObject {
       private let repository = CurrencyConverterRepository()
       @Published var predictions: [String: [PredictionData]] = [:]
       @Published var isLoadingPredictions = false
+    
       
 
       

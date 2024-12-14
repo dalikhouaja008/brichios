@@ -2,8 +2,11 @@ import SwiftUI
 
 struct WalletView: View {
     @StateObject private var viewModel = WalletViewModel()
-    @State private var showQRCodeGenerator = false // État pour contrôler l'affichage du QR code generator
-    @State private var selectedWalletPublicKey: String? // Stocker la clé publique du portefeuille sélectionné
+    @StateObject private var currencyViewModel = CurrencyConverterViewModel()
+    @State private var showQRCodeGenerator = false // État pour contrôlerl'affichag du QR code generator
+    @State private var isAlimentDialogPresented = false
+    @State private var selectedWalletPublicKey: String?
+    @State private var selectedWalletCurency: String?
     @State private var showReceiveSheet = false // État pour afficher la feuille de réception
 
     var body: some View {
@@ -30,7 +33,7 @@ struct WalletView: View {
                         // Horizontal Scrollable Wallets
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 15) {
-                                ForEach(viewModel.uiState.wallets ?? []) { wallet in
+                                ForEach(viewModel.uiState.wallets ) { wallet in
                                     NavigationLink(destination: WalletDetailView(wallet: wallet)) {
                                         WalletRow(wallet: wallet)
                                             .frame(width: 300) // Fixed width for consistency
@@ -50,26 +53,29 @@ struct WalletView: View {
 
                     HStack(spacing: 15) {
                         QuickActionButton(icon: "arrow.up.circle.fill", label: "Send", backgroundColor: Color.green) {
-                            if let wallet = viewModel.uiState.wallets?.first {
-                                selectedWalletPublicKey = wallet.publicKey // Stocker la clé publique
-                                showQRCodeGenerator = true // Afficher le générateur de QR code si nécessaire
+                            if let wallet = viewModel.uiState.wallets.first {
+                                selectedWalletPublicKey = wallet.publicKey // Stocker la clé
                             }
                         }
 
                         QuickActionButton(icon: "arrow.down.circle.fill", label: "Receive", backgroundColor: Color.blue) {
-                            if let wallet = viewModel.uiState.wallets?.first {
+                            if let wallet = viewModel.uiState.wallets.first {
                                 selectedWalletPublicKey = wallet.publicKey
                                 print(selectedWalletPublicKey ?? "public key")// Stocker la clé publique pour la réception
                                 showQRCodeGenerator = true // Afficher la feuille de réception
                             }
                         }
 
-                        QuickActionButton(icon: "qrcode", label: "Scan", backgroundColor: Color.orange) {
-                            showQRCodeGenerator = true // Afficher le QR code generator
+                        QuickActionButton(icon: "plus.circle", label: "Fund Wallet", backgroundColor: Color.orange) {
+                            if let wallet = viewModel.uiState.wallets.first {
+                                selectedWalletCurency = wallet.currency
+                                print(selectedWalletCurency ?? "pas de wallet")
+                                isAlimentDialogPresented=true
+                            }
                         }
 
                         QuickActionButton(icon: "creditcard.fill", label: "Pay", backgroundColor: Color.red) {
-                            if let wallet = viewModel.uiState.wallets?.first {
+                            if let wallet = viewModel.uiState.wallets.first {
                                 selectedWalletPublicKey = wallet.publicKey
                                 showQRCodeGenerator = true // Ou une autre action selon votre logique
                             }
@@ -85,10 +91,22 @@ struct WalletView: View {
             .onAppear {
                 viewModel.fetchWallets()
             }
+            .sheet(isPresented: $isAlimentDialogPresented) {
+                    AlimentDialogView(
+                        walletsViewModel: viewModel,
+                        currencyConverterViewModel: currencyViewModel,
+                        selectedWalletCurrency: selectedWalletCurency ?? ""
+                    )
+                    .presentationDetents([.medium])
+                
+            }
             // Affichage du QRGeneratorView en tant que sheet
             .sheet(isPresented: $showQRCodeGenerator) {
-                QRGeneratorView(text: selectedWalletPublicKey ?? "") // Passer la clé publique au générateur de QR code
+                QRGeneratorView(text: selectedWalletPublicKey ?? "")
+                    .presentationDetents([.medium])
             }
+   
+
         }
     }
 }

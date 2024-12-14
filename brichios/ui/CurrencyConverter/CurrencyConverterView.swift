@@ -104,7 +104,7 @@ struct CurrencyConverterView: View {
                                     .foregroundColor(.red)
                                     .multilineTextAlignment(.center)
                             } else {
-                                Text("Converted Amount: \(viewModel.formatConvertedAmount(viewModel.uiStateCurrency.convertedAmount))")
+                                Text("Converted Amount: \(viewModel.uiStateCurrency.convertedAmount)")
                                     .font(.headline)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.black)

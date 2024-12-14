@@ -16,7 +16,7 @@ struct ExchangeRateView: View {
                     .foregroundColor(.black)
                     .padding(.top, 10) // Reduced from 20
                     .multilineTextAlignment(.leading)
-                VStack {
+               /* VStack {
                     switch viewModel.newsState {
                     case .loading:
                         ProgressView()
@@ -34,7 +34,7 @@ struct ExchangeRateView: View {
                         .frame(height: 150)
                         .padding(.all, 10)
                     }
-                }
+                }*/
                 
                 VStack(spacing: 20) {
                     Text("Currency Rate")
@@ -71,7 +71,7 @@ struct ExchangeRateView: View {
             .padding(.top, -50) // Reduced from -55
             .onAppear {
                 viewModel.fetchExchangeRates()
-                viewModel.fetchNews()
+                //viewModel.fetchNews()
             }
         }
     }
