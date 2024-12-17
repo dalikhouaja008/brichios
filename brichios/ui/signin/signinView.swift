@@ -21,6 +21,7 @@ struct Login: View {
                         TextField("Enter Email Address", text: self.$mail)
                     }
                     .padding(.vertical, 12)
+                    .padding(.leading, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(viewModel.emailError.isEmpty ? Color.gray.opacity(0.3) : Color.red, lineWidth: 1)
@@ -63,6 +64,7 @@ struct Login: View {
                         .padding(.trailing, 16)
                     }
                     .padding(.vertical, 12)
+                    .padding(.leading, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(viewModel.passwordError.isEmpty ? Color.gray.opacity(0.3) : Color.red, lineWidth: 1)
@@ -86,6 +88,7 @@ struct Login: View {
                             .foregroundColor(.gray)
                     }
                     .toggleStyle(CheckboxToggleStyle())
+                    .padding(.top, 8)
                 }
             }
             .padding(.vertical)

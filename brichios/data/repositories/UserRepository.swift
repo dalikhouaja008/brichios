@@ -2,9 +2,14 @@
 import Alamofire
 import Foundation
 
+
+struct ForgotPasswordRequest: Encodable {
+    let email: String
+}
+
 class UserRepository  {
     
-    private let baseURL = "http://172.18.1.239:3000/"
+    private let baseURL = "http://172.18.1.50:3000/"
 
         func createUser(user: User, completion: @escaping (Result<User, Error>) -> Void) {
             let url = baseURL + "auth/signup"
@@ -63,7 +68,32 @@ class UserRepository  {
                     }
                 }
         }
-}
+    func forgotPassword(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+          let url = baseURL + "auth/forgot-password"
+          
+          let request = ForgotPasswordRequest(email: email)
+          
+          AF.request(url,
+                    method: .post,
+                    parameters: request,
+                    encoder: JSONParameterEncoder.default)
+              .responseData { response in
+                  // Debug logging
+                  if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                      print("Raw server response: \(str)")
+                  }
+                  
+                  switch response.result {
+                  case .success:
+                      completion(.success(()))
+                  case .failure(let error):
+                      print("Network error: \(error)")
+                      completion(.failure(error))
+                  }
+              }
+      }
+    }
+
 
 
 

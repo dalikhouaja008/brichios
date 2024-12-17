@@ -13,9 +13,66 @@ enum NetworkError: Error {
     case networkFailure
 }
 
+enum TransactionError: Error {
+    case unauthorized
+    case networkFailure
+    case invalidRequest
+}
+
 class WalletRepository {
     
-    private let baseURL = "http://172.18.1.239:3000/"
+    private let baseURL = "http://172.18.1.50:3000/"
+    func sendTransaction(
+            fromWalletPublicKey: String,
+            toWalletPublicKey: String,
+            amount: Double
+        ) async throws -> String {
+            let url = baseURL + "solana/transfer-between-wallets"
+            
+            guard let token = Auth.shared.getAccessToken() else {
+                throw NetworkError.unauthorized
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(token)",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            ]
+            
+            let parameters: [String: Any] = [
+                "fromWalletPublicKey": fromWalletPublicKey,
+                "toWalletPublicKey": toWalletPublicKey,
+                "amount": amount
+            ]
+            
+            return try await withCheckedThrowingContinuation { continuation in
+                AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+                    .responseString { response in
+                        switch response.result {
+                        case .success(let signature):
+                            print("Transaction sent successfully. Signature: \(signature)")
+                            continuation.resume(returning: signature)
+                        
+                        case .failure(let error):
+                            print("Transaction failed: \(error.localizedDescription)")
+                            if let statusCode = response.response?.statusCode {
+                                switch statusCode {
+                                case 401:
+                                    continuation.resume(throwing: NetworkError.unauthorized)
+                                case 400...499:
+                                    continuation.resume(throwing: TransactionError.invalidRequest)
+                                default:
+                                    continuation.resume(throwing: NetworkError.networkFailure)
+                                }
+                            } else {
+                                continuation.resume(throwing: error)
+                            }
+                        }
+                    }
+            }
+        }
+    
+    
     
     func getUserWallets() async throws -> [WalletSolana] {
         let url = baseURL + "solana/my-wallets"
