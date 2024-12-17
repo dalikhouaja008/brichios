@@ -6,7 +6,7 @@ class AccountRepository {
     
     private init() {}
     
-    private let baseURL = "http://172.18.1.239:3000"  // Replace with your actual API URL
+    private let baseURL = "http://172.18.1.50:3000"  // Replace with your actual API URL
     
     // MARK: - Methods
       

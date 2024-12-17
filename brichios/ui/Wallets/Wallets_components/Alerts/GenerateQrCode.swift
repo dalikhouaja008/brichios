@@ -17,9 +17,8 @@ struct QRGeneratorView: View {
                HStack {
                    Image(systemName: "qrcode")
                        .font(.largeTitle)
-                       .foregroundColor(.blue)
                    Text("Receive Funds")
-                       .font(.title)
+                       .font(.title2)
                        .fontWeight(.bold)
                }
                .padding()
@@ -49,17 +48,10 @@ struct QRGeneratorView: View {
                    .padding()
                
                // Done Button
-               Button(action: {
-                   presentationMode.wrappedValue.dismiss() // Dismiss the view when tapped
-               }) {
-                   Text("Done")
-                       .fontWeight(.semibold)
-                       .padding()
-                       .frame(maxWidth: .infinity)
-                       .background(Color.blue)
-                       .foregroundColor(.white)
-                       .cornerRadius(8)
+               Button("Done", role: .cancel) {
+                   presentationMode.wrappedValue.dismiss()
                }
+               .foregroundColor(.green)
                .padding()
            }
            .padding()
@@ -86,3 +78,4 @@ struct QRGeneratorView: View {
         return UIImage(cgImage: cgImage)
     }
 }
+

@@ -8,7 +8,7 @@ import Alamofire
 import Foundation
 
 class CurrencyConverterRepository{
-    private let baseURL = "http://172.18.1.239:3000/"
+    private let baseURL = "http://172.18.1.50:3000/"
     
     func getCurrencyPredictions(date: String, currencies: [String]) async throws -> PredictionResponse {
         let url = baseURL + "prediction/create-prediction"

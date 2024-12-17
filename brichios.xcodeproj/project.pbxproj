@@ -26,6 +26,8 @@
 		7A6F5F942CE4EFE00015DEAF /* signupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F932CE4EFE00015DEAF /* signupView.swift */; };
 		7A6F5F962CE4EFF10015DEAF /* signupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */; };
 		7A8BBB652CECF0E00081BEE2 /* HomeBrich.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BBB642CECF0E00081BEE2 /* HomeBrich.swift */; };
+		7A8ED0312D0A148300070EEA /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8ED0302D0A148300070EEA /* CodeScanner */; };
+		7A8ED0332D0A1A3D00070EEA /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8ED0322D0A1A3D00070EEA /* QRScannerView.swift */; };
 		7AB16D972CEE58FA001855CA /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 7AB16D962CEE58FA001855CA /* SwiftKeychainWrapper */; };
 		7AB16DA62CEE7852001855CA /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DA52CEE7852001855CA /* ExchangeRate.swift */; };
 		7AB16DA92CEE78E6001855CA /* ExchangeRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB16DA82CEE78E6001855CA /* ExchangeRateView.swift */; };
@@ -64,6 +66,8 @@
 		7AEF60EA2CF789E300CFA05A /* PredictionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF60E92CF789E300CFA05A /* PredictionRequest.swift */; };
 		7AEF60EC2CF78A5B00CFA05A /* PredictionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF60EB2CF78A5B00CFA05A /* PredictionResponse.swift */; };
 		7AEF60EE2CF78B6700CFA05A /* CurrencyConverterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF60ED2CF78B6700CFA05A /* CurrencyConverterRepository.swift */; };
+		7AEF68242D0A8DF6004F8E3E /* AccountsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF68232D0A8DF6004F8E3E /* AccountsAPI.swift */; };
+		7AEF68292D0A99E8004F8E3E /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7AEF68282D0A99E8004F8E3E /* KeychainSwift */; };
 		7AF0DA9D2D01DD1D00C2CD52 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF0DA9C2D01DD1D00C2CD52 /* NewsItem.swift */; };
 		7AF0DA9F2D01E1DD00C2CD52 /* newsItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF0DA9E2D01E1DD00C2CD52 /* newsItemsView.swift */; };
 		7AF251E42CF8A5A800284A49 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF251E32CF8A5A800284A49 /* Card.swift */; };
@@ -106,6 +110,7 @@
 		7A6F5F932CE4EFE00015DEAF /* signupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupView.swift; sourceTree = "<group>"; };
 		7A6F5F952CE4EFF10015DEAF /* signupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupViewModel.swift; sourceTree = "<group>"; };
 		7A8BBB642CECF0E00081BEE2 /* HomeBrich.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrich.swift; sourceTree = "<group>"; };
+		7A8ED0322D0A1A3D00070EEA /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		7AB16DA52CEE7852001855CA /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		7AB16DA82CEE78E6001855CA /* ExchangeRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateView.swift; sourceTree = "<group>"; };
 		7AB16DAA2CEE78FC001855CA /* ExchangeRateModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateModelView.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		7AEF60E92CF789E300CFA05A /* PredictionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionRequest.swift; sourceTree = "<group>"; };
 		7AEF60EB2CF78A5B00CFA05A /* PredictionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionResponse.swift; sourceTree = "<group>"; };
 		7AEF60ED2CF78B6700CFA05A /* CurrencyConverterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterRepository.swift; sourceTree = "<group>"; };
+		7AEF68232D0A8DF6004F8E3E /* AccountsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAPI.swift; sourceTree = "<group>"; };
 		7AF0DA9C2D01DD1D00C2CD52 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		7AF0DA9E2D01E1DD00C2CD52 /* newsItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newsItemsView.swift; sourceTree = "<group>"; };
 		7AF251E32CF8A5A800284A49 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -173,6 +179,8 @@
 			files = (
 				7AB16D972CEE58FA001855CA /* SwiftKeychainWrapper in Frameworks */,
 				B0DE1F552CE3DD4100432CFB /* Alamofire in Frameworks */,
+				7AEF68292D0A99E8004F8E3E /* KeychainSwift in Frameworks */,
+				7A8ED0312D0A148300070EEA /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +217,7 @@
 			children = (
 				7ADDF78D2D09DAEB00CD6172 /* AlimentDialogView.swift */,
 				7A29B0982D077FAA001B94B3 /* GenerateQrCode.swift */,
+				7A8ED0322D0A1A3D00070EEA /* QRScannerView.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -238,12 +247,12 @@
 				B0DE1F4D2CE3D4C200432CFB /* LoginRequest.swift */,
 				7AEF60E02CF77A9800CFA05A /* CurrencyUiState.swift */,
 				7AEF60E22CF77AB900CFA05A /* ExchangeRateUI.swift */,
-				7AEF60E72CF7899100CFA05A /* PredictionData.swift */,
 				7AEF60E92CF789E300CFA05A /* PredictionRequest.swift */,
 				7AEF60EB2CF78A5B00CFA05A /* PredictionResponse.swift */,
 				7AE95D122D010B9B0067E558 /* Account.swift */,
 				7AF0DA9C2D01DD1D00C2CD52 /* NewsItem.swift */,
 				7A29B08D2D075D96001B94B3 /* CurrencyConversionRequest.swift */,
+				7AEF60E72CF7899100CFA05A /* PredictionData.swift */,
 				7A29B08F2D075DBA001B94B3 /* SendTransactionRequest.swift */,
 				7A29B0952D07650F001B94B3 /* WalletUI.swift */,
 			);
@@ -446,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				B0DE1F442CE3BC7D00432CFB /* ApiService.swift */,
+				7AEF68232D0A8DF6004F8E3E /* AccountsAPI.swift */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -513,6 +523,8 @@
 			packageProductDependencies = (
 				B0DE1F542CE3DD4100432CFB /* Alamofire */,
 				7AB16D962CEE58FA001855CA /* SwiftKeychainWrapper */,
+				7A8ED0302D0A148300070EEA /* CodeScanner */,
+				7AEF68282D0A99E8004F8E3E /* KeychainSwift */,
 			);
 			productName = brichios;
 			productReference = B0DE1F232CE3BAA400432CFB /* brichios.app */;
@@ -545,6 +557,8 @@
 			packageReferences = (
 				B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */,
 				7AB16D952CEE58FA001855CA /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				7A8ED02F2D0A148300070EEA /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				7AEF68272D0A99E8004F8E3E /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = B0DE1F242CE3BAA400432CFB /* Products */;
 			projectDirPath = "";
@@ -596,6 +610,7 @@
 				7A29B0942D076043001B94B3 /* WalletRepository.swift in Sources */,
 				7AB16DCC2CEE8832001855CA /* settingsView.swift in Sources */,
 				7AB16DAD2CEE7914001855CA /* ExchangeRateRepository.swift in Sources */,
+				7A8ED0332D0A1A3D00070EEA /* QRScannerView.swift in Sources */,
 				7AB16DC32CEE84D1001855CA /* QuickActionButton.swift in Sources */,
 				7AB16DBA2CEE833F001855CA /* walletView.swift in Sources */,
 				7AB16DDE2CEEA35F001855CA /* OTPView.swift in Sources */,
@@ -622,6 +637,7 @@
 				7AF251E42CF8A5A800284A49 /* Card.swift in Sources */,
 				7AB16DB02CEE81B2001855CA /* CurrencyDropdown.swift in Sources */,
 				B0DE1F4C2CE3BCC700432CFB /* signinViewController.swift in Sources */,
+				7AEF68242D0A8DF6004F8E3E /* AccountsAPI.swift in Sources */,
 				7A6F5F8D2CE4EF050015DEAF /* forgetPasswordViewodel.swift in Sources */,
 				7AF0DA9D2D01DD1D00C2CD52 /* NewsItem.swift in Sources */,
 				7A6F5F912CE4EFAA0015DEAF /* ContentView.swift in Sources */,
@@ -794,6 +810,7 @@
 				DEVELOPMENT_TEAM = 953V584L2D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = brichios/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "we use it to unlock the app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -823,6 +840,7 @@
 				DEVELOPMENT_TEAM = 953V584L2D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = brichios/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "we use it to unlock the app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -866,12 +884,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7A8ED02F2D0A148300070EEA /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.2;
+			};
+		};
 		7AB16D952CEE58FA001855CA /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.1;
+			};
+		};
+		7AEF68272D0A99E8004F8E3E /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.0.0;
 			};
 		};
 		B0DE1F532CE3DD4100432CFB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -885,10 +919,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7A8ED0302D0A148300070EEA /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A8ED02F2D0A148300070EEA /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
 		7AB16D962CEE58FA001855CA /* SwiftKeychainWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7AB16D952CEE58FA001855CA /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		7AEF68282D0A99E8004F8E3E /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7AEF68272D0A99E8004F8E3E /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		B0DE1F542CE3DD4100432CFB /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

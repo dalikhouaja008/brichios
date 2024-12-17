@@ -11,7 +11,7 @@ struct LineChartComponent: View {
             // Header with trend analysis
             HStack {
                 VStack(alignment: .leading) {
-                    Text("7-Day \(toCurrency) Forecast")
+                    Text("\(toCurrency) prediction values for the next seven days")
                         .font(.headline)
                         .fontWeight(.bold)
                     
@@ -46,7 +46,7 @@ struct LineChartComponent: View {
                     )
                     .foregroundStyle(
                         LinearGradient(
-                            gradient: Gradient(colors: [.blue.opacity(0.3), .blue.opacity(0.1)]),
+                            gradient: Gradient(colors: [.blue.opacity(0.2), .blue.opacity(0.05)]),
                             startPoint: .top,
                             endPoint: .bottom
                         )
@@ -59,32 +59,18 @@ struct LineChartComponent: View {
                     )
                     .interpolationMethod(.cardinal)
                     .foregroundStyle(.blue)
+                    .lineStyle(StrokeStyle(lineWidth: 1.5)) // Réduit l'épaisseur
                     
                     // Data points
                     PointMark(
                         x: .value("Date", prediction.date),
                         y: .value("Value", prediction.value)
                     )
-                    .symbolSize(100)
+                    .symbolSize(50) // Réduit la taille des points
                     .foregroundStyle(.blue)
                 }
-                .chartXAxis {
-                    AxisMarks(values: .stride(by: .day)) { value in
-                        AxisValueLabel()
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                    }
-                }
-                .chartYAxis {
-                    AxisMarks(position: .leading, values: .automatic) { _ in
-                        AxisGridLine(stroke: StrokeStyle(dash: [2, 2]))
-                            .foregroundStyle(.gray.opacity(0.3))
-                        AxisValueLabel()
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                    }
-                }
-                .frame(height: 250)
+                .frame(height: 200) // Diminue la hauteur du graphique
+
             } else {
                 Text("No predictions available for \(toCurrency)")
                     .foregroundColor(.red)

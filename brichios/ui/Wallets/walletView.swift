@@ -3,12 +3,13 @@ import SwiftUI
 struct WalletView: View {
     @StateObject private var viewModel = WalletViewModel()
     @StateObject private var currencyViewModel = CurrencyConverterViewModel()
-    @State private var showQRCodeGenerator = false // État pour contrôlerl'affichag du QR code generator
+    
+    @State private var showQRCodeGenerator = false
     @State private var isAlimentDialogPresented = false
-    @State private var selectedWalletPublicKey: String?
-    @State private var selectedWalletCurency: String?
-    @State private var showReceiveSheet = false // État pour afficher la feuille de réception
-
+    @State private var selectedWallet: WalletSolana?
+    @State private var showReceiveSheet = false
+    @State private var showSendMoneySheet = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -20,7 +21,7 @@ struct WalletView: View {
                         .foregroundColor(.primary)
                         .padding(.top)
 
-                    // Conditional rendering based on loading state
+                    // Conditional rendering based on loading state and wallet availability
                     if viewModel.uiState.isLoading {
                         ProgressView()
                             .frame(maxWidth: .infinity)
@@ -29,87 +30,127 @@ struct WalletView: View {
                         Text("Error: \(errorMessage)")
                             .foregroundColor(.red)
                             .padding()
+                    } else if viewModel.uiState.wallets.isEmpty {
+                        VStack {
+                            Image(systemName: "wallet.pass")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(.gray)
+                            
+                            Text("Add Your First Dinars Wallet")
+                                .font(.headline)
+                                .foregroundColor(.secondary)
+                            
+                            Button(action: {
+                                // Add logic to create a new wallet
+                                // This could present a sheet or navigate to a wallet creation view
+                            }) {
+                                Text("Create Wallet")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                            }
+                            .padding(.top)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
                     } else {
                         // Horizontal Scrollable Wallets
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 15) {
-                                ForEach(viewModel.uiState.wallets ) { wallet in
-                                    NavigationLink(destination: WalletDetailView(wallet: wallet)) {
-                                        WalletRow(wallet: wallet)
-                                            .frame(width: 300) // Fixed width for consistency
-                                    }
+                                ForEach(viewModel.uiState.wallets) { wallet in
+                                    WalletRow(wallet: wallet)
+                                        .frame(width: 300) // Fixed width for consistency
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(selectedWallet?.id == wallet.id ? Color.blue : Color.clear, lineWidth: 2)
+                                        )
+                                        .onTapGesture {
+                                            // Deselect if tapping the already selected wallet
+                                            selectedWallet = (selectedWallet?.id == wallet.id) ? nil : wallet
+                                        }
                                 }
                             }
                             .padding(.horizontal)
                         }
+                        
+                        // Explicitly select first wallet if none is selected
+                        .onAppear {
+                            if selectedWallet == nil && !viewModel.uiState.wallets.isEmpty {
+                                selectedWallet = viewModel.uiState.wallets.first
+                            }
+                        }
                     }
 
                     // Quick Actions Section
-                    Text("Quick Actions")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
-                        .padding(.top)
+                    if !viewModel.uiState.wallets.isEmpty {
+                        Text("Quick Actions")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.primary)
+                            .padding(.top)
 
-                    HStack(spacing: 15) {
-                        QuickActionButton(icon: "arrow.up.circle.fill", label: "Send", backgroundColor: Color.green) {
-                            if let wallet = viewModel.uiState.wallets.first {
-                                selectedWalletPublicKey = wallet.publicKey // Stocker la clé
+                        HStack(spacing: 15) {
+                            QuickActionButton(icon: "arrow.up.circle.fill", label: "Send", backgroundColor: Color.green) {
+                                guard selectedWallet != nil else { return }
+                                showSendMoneySheet = true
                             }
-                        }
+                            .disabled(selectedWallet == nil)
 
-                        QuickActionButton(icon: "arrow.down.circle.fill", label: "Receive", backgroundColor: Color.blue) {
-                            if let wallet = viewModel.uiState.wallets.first {
-                                selectedWalletPublicKey = wallet.publicKey
-                                print(selectedWalletPublicKey ?? "public key")// Stocker la clé publique pour la réception
-                                showQRCodeGenerator = true // Afficher la feuille de réception
+                            QuickActionButton(icon: "arrow.down.circle.fill", label: "Receive", backgroundColor: Color.blue) {
+                                guard selectedWallet != nil else { return }
+                                showQRCodeGenerator = true
                             }
-                        }
+                            .disabled(selectedWallet == nil)
 
-                        QuickActionButton(icon: "plus.circle", label: "Fund Wallet", backgroundColor: Color.orange) {
-                            if let wallet = viewModel.uiState.wallets.first {
-                                selectedWalletCurency = wallet.currency
-                                print(selectedWalletCurency ?? "pas de wallet")
-                                isAlimentDialogPresented=true
+                            QuickActionButton(icon: "plus.circle", label: "Fund Wallet", backgroundColor: Color.orange) {
+                                guard selectedWallet != nil else { return }
+                                isAlimentDialogPresented = true
                             }
-                        }
+                            .disabled(selectedWallet == nil)
 
-                        QuickActionButton(icon: "creditcard.fill", label: "Pay", backgroundColor: Color.red) {
-                            if let wallet = viewModel.uiState.wallets.first {
-                                selectedWalletPublicKey = wallet.publicKey
-                                showQRCodeGenerator = true // Ou une autre action selon votre logique
+                            QuickActionButton(icon: "building.columns.fill", label: "withdrawal", backgroundColor: Color.red) {
+                                guard selectedWallet != nil else { return }
                             }
+                            .disabled(selectedWallet == nil)
                         }
                     }
-
-                    // Recent Transactions Section (commenté pour simplifier l'exemple)
                 }
                 .padding()
+                Text("Recent Transactions")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                    .padding(.top)
             }
-            .navigationTitle("Wallet")
-            .navigationBarTitleDisplayMode(.inline)
+            .padding(.top, -55)
             .onAppear {
                 viewModel.fetchWallets()
             }
             .sheet(isPresented: $isAlimentDialogPresented) {
-                    AlimentDialogView(
-                        walletsViewModel: viewModel,
-                        currencyConverterViewModel: currencyViewModel,
-                        selectedWalletCurrency: selectedWalletCurency ?? ""
-                    )
-                    .presentationDetents([.medium])
-                
+                AlimentDialogView(
+                    walletsViewModel: viewModel,
+                    currencyConverterViewModel: currencyViewModel,
+                    selectedWalletCurrency: selectedWallet?.currency ?? ""
+                )
+                .presentationDetents([.medium])
             }
-            // Affichage du QRGeneratorView en tant que sheet
             .sheet(isPresented: $showQRCodeGenerator) {
-                QRGeneratorView(text: selectedWalletPublicKey ?? "")
+                QRGeneratorView(text: selectedWallet?.publicKey ?? "")
                     .presentationDetents([.medium])
             }
-   
-
+            .sheet(isPresented: $showSendMoneySheet) {
+                SendMoneyView(isPresented: $showSendMoneySheet, viewModel: viewModel)
+                    .presentationDetents([.medium, .large])
+            }
         }
     }
 }
+
+
+
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
         WalletView()

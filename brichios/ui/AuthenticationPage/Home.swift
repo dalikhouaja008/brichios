@@ -11,7 +11,7 @@ import SwiftUI
 struct Home: View {
     @ObservedObject var viewModel: SigninViewModel
     @State private var index = 0
-    @State private var showForgotPasswordSheet = false
+    @State private var showForgetPasswordSheet = false
 
     var body: some View {
         VStack {
@@ -60,7 +60,7 @@ struct Home: View {
 
             if self.index == 0 {
                 Button(action: {
-                    self.showForgotPasswordSheet.toggle()
+                    self.showForgetPasswordSheet.toggle()
                 }) {
                     Text("Forget Password?")
                         .foregroundColor(self.index == 0 ? .black : .white)
@@ -71,8 +71,8 @@ struct Home: View {
                 .background(Color.white)
                 .clipShape(Capsule())
                 .padding(.top, 20)
-                .sheet(isPresented: $showForgotPasswordSheet) {
-                    ForgotPasswordView()
+                .sheet(isPresented: $showForgetPasswordSheet) {
+                    ForgetPasswordView()
                 }
             }
 

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 struct AlimentDialogView: View {
     @ObservedObject var walletsViewModel: WalletViewModel
     @ObservedObject var currencyConverterViewModel: CurrencyConverterViewModel
@@ -25,20 +26,16 @@ struct AlimentDialogView: View {
             // Title
             HStack {
                 Image(systemName: "wallet.pass")
-                    .foregroundColor(Color(hex: 0x3D5AFE))
                 Text("Fund your \(selectedWalletCurrency) Wallet")
                     .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color(hex: 0x3D5AFE))
+                    .fontWeight(.bold)
             }
             
             // Dinars Amount TextField
             TextField("Amount in Dinars", text: $dinarsAmount)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.decimalPad)
-                .padding(.vertical, 8)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(dinarsAmount.isEmpty ? Color.red : Color.clear, lineWidth: 1))
-                .padding(.horizontal)
+                .padding()
                 .onChange(of: dinarsAmount) { newValue in
                     if !newValue.isEmpty {
                         currencyConverterViewModel.calculateSellingRate(
@@ -57,7 +54,7 @@ struct AlimentDialogView: View {
                 .foregroundColor(.black)
             
             // Conversion Progress Indicator
-            if walletsViewModel.uiState.isLoading {
+            if walletsViewModel.uiState.isLoading || currencyConverterViewModel.uiStateCurrency.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: 0x3D5AFE)))
             }
@@ -67,12 +64,17 @@ struct AlimentDialogView: View {
                 Button("Cancel", role: .cancel) {
                     presentationMode.wrappedValue.dismiss()
                 }
-                .buttonStyle(.bordered)
-                
+                .foregroundColor(.red)
+                .padding()
+                Spacer()
                 Button("Apply") {
                     if let amount = Double(dinarsAmount), amount > 0 {
+                        // Convertir le montant en entier
+                        let integerAmount = Int(amount.rounded()) // Arrondir à l'entier le plus proche
+                        
+                        // Assurez-vous d'envoyer cet entier dans l'airdrop
                         walletsViewModel.convertCurrency(
-                            amount: currencyConverterViewModel.uiStateCurrency.convertedAmount,
+                            amount: Double(integerAmount), // Convertir en double si nécessaire pour le calcul
                             fromCurrency: selectedWalletCurrency
                         )
                     } else {
@@ -80,7 +82,8 @@ struct AlimentDialogView: View {
                         showErrorAlert = true
                     }
                 }
-                .buttonStyle(.borderedProminent)
+                .foregroundColor(.green)
+                .padding()
                 .disabled(walletsViewModel.uiState.isLoading || dinarsAmount.isEmpty)
             }
         }
@@ -131,4 +134,3 @@ extension Color {
         )
     }
 }
-

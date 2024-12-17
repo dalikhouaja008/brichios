@@ -7,9 +7,51 @@
 
 import Foundation
 
+enum SendTransactionState: Equatable {
+    case idle
+    case loading
+    case success(signature: String?)
+    case error(message: String)
+}
+
 class WalletViewModel: ObservableObject {
     @Published var uiState = WalletUI()
     private let repository = WalletRepository()
+    @Published var sendTransactionState: SendTransactionState = .idle
+    
+    func sendTransaction(
+          fromWalletPublicKey: String,
+          toWalletPublicKey: String,
+          amount: Double
+      ) {
+          // Reset transaction state to loading
+          sendTransactionState = .loading
+          
+          Task {
+              do {
+                  let signature = try await repository.sendTransaction(
+                      fromWalletPublicKey: fromWalletPublicKey,
+                      toWalletPublicKey: toWalletPublicKey,
+                      amount: amount
+                  )
+                  
+                  // Perform updates on the main thread
+                  await MainActor.run {
+                      // Update transaction state to success
+                      sendTransactionState = .success(signature: signature)
+                      
+                      // Refresh wallets after successful transaction
+                      fetchWallets()
+                  }
+              } catch {
+                  // Perform error handling on the main thread
+                  await MainActor.run {
+                      sendTransactionState = .error(message: error.localizedDescription)
+                  }
+              }
+          }
+      }
+    
     
     func fetchWallets() {
         uiState.isLoading = true

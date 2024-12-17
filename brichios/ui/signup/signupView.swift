@@ -26,6 +26,7 @@ struct SignUp : View {
                             TextField("Enter your name", text: self.$username)
                         }
                         .padding(.vertical, 12)
+                        .padding(.leading, 12)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(viewModel.usernameError.isEmpty ? Color.gray.opacity(0.3) : Color.red, lineWidth: 1)
@@ -54,6 +55,7 @@ struct SignUp : View {
                             TextField("Enter Email Address", text: self.$mail)
                         }
                         .padding(.vertical, 12)
+                        .padding(.leading, 12)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(viewModel.emailError.isEmpty ? Color.gray.opacity(0.3) : Color.red, lineWidth: 1)
@@ -83,6 +85,7 @@ struct SignUp : View {
                                 .keyboardType(.numberPad) // Pour un numéro de téléphone
                         }
                         .padding(.vertical, 12)
+                        .padding(.leading, 12)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(viewModel.phoneError.isEmpty ? Color.gray.opacity(0.3) : Color.red, lineWidth: 1)
@@ -124,6 +127,7 @@ struct SignUp : View {
                             .padding(.trailing, 16)
                         }
                         .padding(.vertical, 12)
+                        .padding(.leading, 12)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(viewModel.passwordError.isEmpty ? Color.gray.opacity(0.3) : Color.red, lineWidth: 1)
@@ -163,7 +167,9 @@ struct SignUp : View {
                             }
                             .padding(.trailing, 16)
 
-                        }.padding(.vertical, 12).background(
+                        }.padding(.vertical, 12)
+                         .padding(.leading, 12) 
+                         .background(
                            RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.3), lineWidth:1))
 
                     }
@@ -214,7 +220,7 @@ struct SignUp : View {
         // Si les deux sont valides, procéder à la connexion
         if isEmailValid && isPasswordValid && isPhoneValid && isUsernameValid && isConfirmPasswordValid {
             isLoading = true
-            var newUser = User(name: username, email: mail, numTel: phone, password: pass)
+            let newUser = User(name: username, email: mail, numTel: phone, password: pass)
             viewModel.signup(newUser: newUser)
             
             // Observer le changement d'état de connexion
