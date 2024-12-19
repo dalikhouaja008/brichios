@@ -10,68 +10,84 @@ import SwiftUI
 struct ExchangeRateRow: View {
     let rate: ExchangeRate
     
-    // Date formatter to remove time
-    private var formattedDate: String {
-        let isoFormatter = ISO8601DateFormatter()
-        let displayFormatter = DateFormatter()
-        displayFormatter.dateFormat = "dd MMM yyyy"
-        
-        if let date = isoFormatter.date(from: rate.date) {
-            return displayFormatter.string(from: date)
+    private func formatDate(_ dateString: String) -> String {
+            let dateFormatter = DateFormatter()
+            // Configuration pour le format d'entrée du backend
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            if let date = dateFormatter.date(from: dateString) {
+                // Configuration pour n'afficher que la date
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                return dateFormatter.string(from: date)
+            }
+            // Si le parsing échoue, retourner juste la partie date
+            // Prendre les 10 premiers caractères qui correspondent à "yyyy-MM-dd"
+            if dateString.count >= 10 {
+                let endIndex = dateString.index(dateString.startIndex, offsetBy: 10)
+                let dateOnly = String(dateString[..<endIndex])
+                
+                // Convertir du format yyyy-MM-dd au format dd/MM/yyyy
+                let components = dateOnly.split(separator: "-")
+                if components.count == 3 {
+                    return "\(components[2])/\(components[1])/\(components[0])"
+                }
+            }
+            return dateString
         }
-        return rate.date
-    }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(spacing: 0) {
+            HStack(alignment: .center, spacing: 15) {
+                // Currency Code et Designation
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(rate.code)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.blue)
+                    Text(rate.designation)
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
+                        .lineLimit(1)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                // Rates
+                HStack(spacing: 20) {
+                    // Buying Rate
+                    VStack(alignment: .trailing, spacing: 4) {
+                        Text("Buy")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                        Text(rate.buyingRate)
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.green)
+                    }
+                    
+                    // Selling Rate
+                    VStack(alignment: .trailing, spacing: 4) {
+                        Text("Sell")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                        Text(rate.sellingRate)
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            
+            // Date
             HStack {
-                Text(rate.designation)
-                    .font(.headline)
-                    .foregroundColor(.blue)
-                Spacer()
-                Text(rate.code)
-                    .font(.subheadline)
+                Text(formatDate(rate.date))
+                    .font(.system(size: 12))
                     .foregroundColor(.gray)
-            }
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Buying Rate")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Text(rate.buyingRate)
-                        .font(.body)
-                        .foregroundColor(.green)
-                }
                 Spacer()
-                VStack(alignment: .trailing) {
-                    Text("Selling Rate")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Text(rate.sellingRate)
-                        .font(.body)
-                        .foregroundColor(.red)
-                }
             }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
             
-            Text("Unit: \(rate.unit)")
-                .font(.caption)
-                .foregroundColor(.gray)
-            
-            Text("Date: \(formattedDate)")
-                .font(.caption)
-                .foregroundColor(.purple)
+            Divider()
         }
-        .padding()
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [Color.white, Color.blue.opacity(0.1)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
-        .cornerRadius(12)
-        .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
-        .padding(.horizontal)
+        .background(Color.white)
     }
 }

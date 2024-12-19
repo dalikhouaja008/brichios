@@ -25,7 +25,7 @@ struct WalletRow: View {
                 Text("\(String(format: "%.3f", wallet.balance)) SOL")
                     .font(.subheadline)
                     .foregroundColor(.white)
-                Text("\(String(format: "%.3f", wallet.originalAmount))\(wallet.currency)")
+                Text("\(String(format: "%.3f", wallet.originalAmount ?? 0.0))\(wallet.currency)")
                     .font(.subheadline)
                     .foregroundColor(.white)
             }

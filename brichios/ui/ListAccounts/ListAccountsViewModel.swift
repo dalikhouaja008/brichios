@@ -1,45 +1,51 @@
+// ListAccountsViewModel.swift
 import SwiftUI
+import Combine
 
 class ListAccountsViewModel: ObservableObject {
-    @Published var accounts: [CustomAccount] = [
-        CustomAccount(name: "Account 1", balance: 4500, isDefault: true),
-        CustomAccount(name: "Account 2", balance: 3200, isDefault: false),
-        CustomAccount(name: "Account 3", balance: 2750, isDefault: false),
-        CustomAccount(name: "Account 4", balance: 8550, isDefault: false),
-        CustomAccount(name: "Account 5", balance: 866550, isDefault: false)
-    ]
-    
-    @Published var selectedAccount: CustomAccount? {
+    @Published var accounts: [Account] = []
+    @Published var selectedAccount: Account? {
         didSet {
             if let account = selectedAccount {
-                name = account.name
-                balance = account.balance
-                isDefault = account.isDefault
+                nickname = account.nickname ?? ""
             }
         }
     }
     
-    @Published var name: String = ""
-    @Published var balance: Double = 0.0
-    @Published var isDefault: Bool = false
-    @Published var type: String = "Savings"
-
-    init() {
-        selectedAccount = accounts.first
-        if let account = selectedAccount {
-            name = account.name
-            balance = account.balance
-            isDefault = account.isDefault
+    @Published var nickname: String = ""
+    @Published var isLoading = false
+    @Published var error: String?
+    @Published var showError = false
+    
+    init() { }
+    
+    func addAccount(_ account: Account) {
+        DispatchQueue.main.async {
+            self.accounts.append(account)
+            if self.accounts.count == 1 {
+                self.selectedAccount = account
+            }
         }
     }
-
-    func toggleDefault(for account: CustomAccount) {
-        accounts.indices.forEach { index in
-            accounts[index].isDefault = accounts[index].id == account.id
+    
+    func updateNickname(for account: Account, newNickname: String) {
+        guard let index = accounts.firstIndex(where: { $0.rib == account.rib }) else { return }
+        if var updatedAccount = accounts[index] as? Account {
+            accounts[index] = updatedAccount
+            if selectedAccount?.rib == account.rib {
+                selectedAccount = updatedAccount
+            }
         }
     }
+    
+    func refreshAccounts() {
+        objectWillChange.send()
+    }
+}
 
-    func getAccountTypes() -> [String] {
-        return ["Savings", "Checking", "Business"]
+// Extension for UI compatibility
+extension Account {
+    var name: String {
+        nickname ?? "Account"
     }
 }

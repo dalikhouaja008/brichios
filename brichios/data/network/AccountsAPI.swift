@@ -3,7 +3,7 @@ import Combine
 
 class AccountsAPI {
     static let shared = AccountsAPI()
-    private let baseURL = "http://172.18.1.239:3000" // Replace with your actual API base URL
+    private let baseURL = "http://172.18.1.50:3000" // Replace with your actual API base URL
     
     private init() {}
     

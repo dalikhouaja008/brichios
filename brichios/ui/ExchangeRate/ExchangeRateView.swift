@@ -3,12 +3,15 @@
 import Foundation
 import SwiftUI
 
+import Foundation
+import SwiftUI
+
 struct ExchangeRateView: View {
     @StateObject private var viewModel = ExchangeRateViewModel()
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) { 
+            VStack(spacing: 20) {
                 // News Carousel
                 Text("Latest News")
                     .font(.title)
