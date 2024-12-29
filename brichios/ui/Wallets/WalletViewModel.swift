@@ -14,10 +14,56 @@ enum SendTransactionState: Equatable {
     case error(message: String)
 }
 
+enum CreateTNDWalletState: Equatable {
+    case idle
+    case loading
+    case success(wallet: WalletSolana)
+    case error(message: String)
+    
+    // Implémentation de Equatable
+    static func == (lhs: CreateTNDWalletState, rhs: CreateTNDWalletState) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle):
+            return true
+        case (.loading, .loading):
+            return true
+        case (.success(let wallet1), .success(let wallet2)):
+            return wallet1.id == wallet2.id
+        case (.error(let message1), .error(let message2)):
+            return message1 == message2
+        default:
+            return false
+        }
+    }
+}
+
 class WalletViewModel: ObservableObject {
     @Published var uiState = WalletUI()
     private let repository = WalletRepository()
     @Published var sendTransactionState: SendTransactionState = .idle
+    @Published var createWalletState: CreateTNDWalletState = .idle
+    
+    func createTNDWallet(amount: Double) {
+            createWalletState = .loading
+            
+            Task {
+                do {
+                    let wallet = try await repository.createTNDWallet(amount: amount)
+                    await MainActor.run {
+                        createWalletState = .success(wallet: wallet)
+                        fetchWallets()  // Déplacé après le succès
+                    }
+                } catch {
+                    await MainActor.run {
+                        createWalletState = .error(message: error.localizedDescription)
+                    }
+                }
+            }
+        }
+    
+    
+    
+    
     
     func sendTransaction(
           fromWalletPublicKey: String,
@@ -57,12 +103,16 @@ class WalletViewModel: ObservableObject {
         uiState.isLoading = true
         Task {
             do {
-                print("test")
-                let wallets = try await repository.getUserWallets()
-                print(wallets)
+                let allWallets = try await repository.getUserWallets()
+                
+                // Separate TND wallet from other wallets
+                let tndWallet = allWallets.first { $0.currency == "TND" }
+                let otherWallets = allWallets.filter { $0.currency != "TND" }
+                
                 DispatchQueue.main.async {
                     self.uiState.isLoading = false
-                    self.uiState.wallets = wallets
+                    self.uiState.wallets = otherWallets
+                    self.uiState.TNDWallet = tndWallet
                 }
             } catch {
                 DispatchQueue.main.async {

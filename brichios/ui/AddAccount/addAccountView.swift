@@ -2,37 +2,49 @@ import SwiftUI
 
 struct AddAccountView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = AddAccountViewModel()
-    @FocusState private var focusedIndex: Int?
+    @StateObject private var viewModel: AddAccountViewModel
+    @Namespace private var animation
+    
+    
+    var onAccountAdded: ((Account) -> Void)?
+    
 
+    init(onAccountAdded: ((Account) -> Void)? = nil) {
+        let viewModel = AddAccountViewModel()
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.onAccountAdded = onAccountAdded
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
-                // Background
-                Color("Background") // Add this color to your assets
-                    .ignoresSafeArea()
+                BackgroundView()
                 
                 VStack(spacing: 0) {
-                    // Progress Bar
-                    ProgressBar(currentStep: viewModel.currentStep, totalSteps: viewModel.totalSteps)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 10)
                     
-                    // Main Content
+                    EnhancedProgressBar(
+                        currentStep: viewModel.currentStep,
+                        totalSteps: viewModel.totalSteps
+                    )
+                    .padding(.horizontal, 20)
+                    .padding(.top, 10)
+                    
                     ScrollView {
                         VStack(spacing: 25) {
                             ForEach(1...viewModel.totalSteps, id: \.self) { step in
-                                StepView(
+                                StepContent(
                                     isCurrentStep: viewModel.currentStep == step,
                                     stepNumber: step,
                                     title: stepTitle(for: step),
-                                    content: {
-                                        stepContent(for: step)
-                                    },
+                                    subtitle: stepSubtitle(for: step),
+                                    stepContent: stepContent(for: step) ,
                                     onStepTapped: {
-                                        withAnimation { viewModel.currentStep = step }
+                                        withAnimation(.spring()) {
+                                            viewModel.currentStep = step
+                                        }
                                     }
                                 )
+                                .matchedGeometryEffect(id: "step\(step)", in: animation)
                             }
                         }
                         .padding(.horizontal, 20)
@@ -40,49 +52,15 @@ struct AddAccountView: View {
                     }
                     .disabled(viewModel.isLoading)
                     
-                    // Bottom Button
-                    VStack {
-                        Button(action: handleNextButtonTap) {
-                            HStack {
-                                Text(viewModel.currentStep < viewModel.totalSteps ? "Suivant" : "Terminer")
-                                    .fontWeight(.semibold)
-                                
-                                if !viewModel.isLoading {
-                                    Image(systemName: "arrow.right")
-                                        .font(.body.bold())
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50)
-                            .background(
-                                Group {
-                                    if viewModel.isStepValid() {
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [Color("Color"), Color("Color1"), Color("Color2")]),
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                    } else {
-                                        Color.gray.opacity(0.3)
-                                    }
-                                }
-                            )
-                            .foregroundColor(viewModel.isStepValid() ? .white : .gray)
-                            .cornerRadius(12)
-                            .overlay(
-                                Group {
-                                    if viewModel.isLoading {
-                                        ProgressView()
-                                            .tint(.white)
-                                    }
-                                }
-                            )
-                        }
-                        .disabled(!viewModel.isStepValid() || viewModel.isLoading)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                    }
-                    .background(Color("Background"))
+                    BottomActionButton(
+                        action: handleNextButtonTap,
+                        isEnabled: viewModel.isStepValid(),
+                        isLoading: viewModel.isLoading,
+                        title: viewModel.currentStep < viewModel.totalSteps ? "Suivant" : "Terminer",
+                        gradientColors: [Color("Color"), Color("Color1"), Color("Color2")]
+                    )
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -102,67 +80,177 @@ struct AddAccountView: View {
             .alert(
                 "Erreur",
                 isPresented: $viewModel.showAlert,
-                actions: {
-                    Button("OK", role: .cancel) {}
-                },
-                message: {
-                    Text(viewModel.error ?? "Une erreur inattendue s'est produite")
-                }
+                actions: { Button("OK", role: .cancel) {} },
+                message: { Text(viewModel.error ?? "Une erreur inattendue s'est produite") }
             )
+        }
+        .onAppear {
+            // Set up the callback in viewModel
+            viewModel.onAccountAdded = { account in
+                onAccountAdded?(account)
+            }
         }
     }
     
     private func handleNextButtonTap() {
         if viewModel.currentStep < viewModel.totalSteps {
-            withAnimation {
-                viewModel.moveToNextStep()
-            }
+            viewModel.moveToNextStep()
+            generateHapticFeedback()
         } else {
-            viewModel.saveAccount()
-            dismiss()
+            if viewModel.saveAccount() {
+                generateSuccessFeedback()
+                dismiss() // This will dismiss the sheet and return to ListAccount
+            }
         }
     }
-
+    
     private func stepTitle(for step: Int) -> String {
         switch step {
         case 1: return "Numéro RIB"
         case 2: return "Nom du compte"
-        case 3: return "Code OTP"
         default: return ""
         }
     }
-
-    @ViewBuilder
-    private func stepContent(for step: Int) -> some View {
+    
+    private func stepSubtitle(for step: Int) -> String {
         switch step {
-        case 1:
-            CustomTextField(
-                text: $viewModel.rib,
-                placeholder: "Entrez votre RIB",
-                keyboardType: .numberPad
-            )
-            .disabled(viewModel.isLoading)
-
-        case 2:
-            CustomTextField(
-                text: $viewModel.nickname,
-                placeholder: "Choisissez un nom pour ce compte"
-            )
-            .disabled(viewModel.isLoading)
-
-        case 3:
-            OTPInputView(
-                otp: $viewModel.otp,
-                focusedIndex: $focusedIndex,
-                isLoading: viewModel.isLoading
-            )
-        default:
-            EmptyView()
+        case 1: return "Entrez votre identifiant bancaire"
+        case 2: return "Personnalisez votre compte"
+        default: return ""
         }
+    }
+    // Replace your current stepContent function with this:
+    
+    private func stepContent(for step: Int) -> AnyView {
+        return switch step {
+            case 1:
+                AnyView(
+                    CustomTextField(
+                        text: $viewModel.rib,
+                        placeholder: "Entrez votre RIB",
+                        keyboardType: .numberPad
+                    )
+                    .disabled(viewModel.isLoading)
+                )
+                
+            case 2:
+                AnyView(
+                    CustomTextField(
+                        text: $viewModel.nickname,
+                        placeholder: "Choisissez un nom pour ce compte"
+                    )
+                    .disabled(viewModel.isLoading)
+                )
+                
+            default:
+                AnyView(EmptyView())
+        }
+    }
+    
+    private func generateHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    
+    private func generateSuccessFeedback() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
 }
 
-// Custom TextField View
+// MARK: - Supporting Views
+struct StepContent: View {
+    let isCurrentStep: Bool
+    let stepNumber: Int
+    let title: String
+    let subtitle: String
+    let stepContent: AnyView  // Already AnyView type
+    let onStepTapped: () -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            HStack(alignment: .top, spacing: 15) {
+                Text("\(stepNumber)")
+                    .font(.headline.bold())
+                    .foregroundColor(isCurrentStep ? .white : .gray)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(isCurrentStep ? Color("Color2") : Color.gray.opacity(0.3))
+                    )
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(title)
+                        .font(.title3.bold())
+                        .foregroundColor(isCurrentStep ? .primary : .gray)
+                    
+                    Text(subtitle)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    if isCurrentStep {
+                        stepContent  // Use directly, already AnyView
+                            .transition(.opacity)
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(isCurrentStep ? Color("Color1").opacity(0.1) : Color.clear)
+        )
+        .onTapGesture(perform: onStepTapped)
+    }
+}
+
+struct BackgroundView: View {
+    var body: some View {
+        Color("Background")
+            .overlay(
+                Rectangle()
+                    .fill(
+                        LinearGradient(
+                            colors: [Color("Color2").opacity(0.1), .clear],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            )
+            .ignoresSafeArea()
+    }
+}
+
+struct EnhancedProgressBar: View {
+    let currentStep: Int
+    let totalSteps: Int
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(height: 6)
+                
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [Color("Color"), Color("Color2")],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(
+                        width: geometry.size.width * CGFloat(currentStep) / CGFloat(totalSteps),
+                        height: 6
+                    )
+                    .animation(.spring(), value: currentStep)
+            }
+        }
+        .frame(height: 6)
+    }
+}
+
 struct CustomTextField: View {
     @Binding var text: String
     let placeholder: String
@@ -176,148 +264,55 @@ struct CustomTextField: View {
     }
 }
 
-// Progress Bar View
-struct ProgressBar: View {
-    let currentStep: Int
-    let totalSteps: Int
-    
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .foregroundColor(.gray.opacity(0.2))
-                    .frame(height: 4)
-                
-                Rectangle()
-                    .foregroundColor(Color("Color2"))
-                    .frame(width: geometry.size.width * CGFloat(currentStep) / CGFloat(totalSteps), height: 4)
-                    .animation(.easeInOut, value: currentStep)
-            }
-            .cornerRadius(2)
-        }
-        .frame(height: 4)
-    }
-}
-
-// OTP Input View
-struct OTPInputView: View {
-    @Binding var otp: [String]
-    var focusedIndex: FocusState<Int?>.Binding
+struct BottomActionButton: View {
+    let action: () -> Void
+    let isEnabled: Bool
     let isLoading: Bool
+    let title: String
+    let gradientColors: [Color]
     
     var body: some View {
-        VStack(alignment: .center, spacing: 16) {
-            Text("Entrez le code OTP reçu par SMS")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            
-            HStack(spacing: 12) {
-                ForEach(0..<6, id: \.self) { index in
-                    OTPDigitField(
-                        digit: $otp[index],
-                        index: index,
-                        focusedIndex: focusedIndex
-                    )
+        Button(action: action) {
+            HStack {
+                Text(title)
+                    .fontWeight(.semibold)
+                
+                if !isLoading {
+                    Image(systemName: "arrow.right")
+                        .font(.body.bold())
                 }
             }
-        }
-        .disabled(isLoading)
-    }
-}
-
-struct LoadingProgressView: View {
-    var body: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-            
-            ProgressView()
-                .scaleEffect(1.5)
-                .tint(.white)
-        }
-    }
-}
-struct StepView<Content: View>: View {
-    let isCurrentStep: Bool
-    let stepNumber: Int
-    let title: String
-    let content: Content
-    let onStepTapped: () -> Void
-
-    init(isCurrentStep: Bool, stepNumber: Int, title: String, @ViewBuilder content: () -> Content, onStepTapped: @escaping () -> Void) {
-        self.isCurrentStep = isCurrentStep
-        self.stepNumber = stepNumber
-        self.title = title
-        self.content = content()
-        self.onStepTapped = onStepTapped
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack(alignment: .top, spacing: 15) {
-                VStack {
-                    Text("\(stepNumber)")
-                        .font(.title3.bold())
-                        .foregroundColor(isCurrentStep ? .white : .gray)
-                        .frame(width: 40, height: 40)
-                        .background(isCurrentStep ? Color("Color2") : Color.gray.opacity(0.3))
-                        .clipShape(Circle())
-                    if !isCurrentStep {
-                        Spacer()
+            .frame(maxWidth: .infinity)
+            .frame(height: 54)
+            .background(
+                Group {
+                    if isEnabled {
+                        LinearGradient(
+                            colors: gradientColors,
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    } else {
+                        LinearGradient(
+                            colors: [Color.gray.opacity(0.3)],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
                     }
                 }
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(title)
-                        .font(isCurrentStep ? .title2.bold() : .headline)
-                        .foregroundColor(isCurrentStep ? .primary : .gray)
-
-                    if isCurrentStep {
-                        content
-                    }
-                }
-
-                Spacer()
-            }
-            .onTapGesture {
-                onStepTapped()
-            }
-        }
-        .padding()
-        .background(isCurrentStep ? Color("Color1").opacity(0.3) : Color.clear)
-        .cornerRadius(12)
-        .shadow(color: isCurrentStep ? Color("Color2").opacity(0.3) : .clear, radius: 6, x: 0, y: 4)
-        .animation(.easeInOut, value: isCurrentStep)
-    }
-}
-struct OTPDigitField: View {
-    @Binding var digit: String
-    let index: Int
-    var focusedIndex: FocusState<Int?>.Binding  // FocusState binding to manage focus
-
-    var body: some View {
-        TextField("", text: $digit)
-            .keyboardType(.numberPad)
-            .frame(width: 30, height: 40)
-            .multilineTextAlignment(.center)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.green, lineWidth: 1)
             )
-            .focused(focusedIndex, equals: index)
-            .onChange(of: digit) { newValue in
-                if newValue.count > 1 {
-                    digit = String(newValue.prefix(1))
+            .foregroundColor(isEnabled ? .white : .gray)
+            .cornerRadius(16)
+            .overlay(
+                Group {
+                    if isLoading {
+                        ProgressView()
+                            .tint(.white)
+                    }
                 }
-
-                if newValue.isEmpty {
-                    focusedIndex.wrappedValue = index > 0 ? index - 1 : nil // Move back when empty
-                } else {
-                    focusedIndex.wrappedValue = index < 5 ? index + 1 : nil // Move forward
-                }
-            }
+            )
+        }
+        .disabled(!isEnabled || isLoading)
     }
 }
 

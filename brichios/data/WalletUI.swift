@@ -11,5 +11,6 @@ struct WalletUI {
     var isLoading: Bool = false
     var errorMessage: String?
     var convertedWallet: WalletSolana?
+    var TNDWallet : WalletSolana?
     var conversionError: String?
 }

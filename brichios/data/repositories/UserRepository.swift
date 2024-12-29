@@ -9,7 +9,7 @@ struct ForgotPasswordRequest: Encodable {
 
 class UserRepository  {
     
-    private let baseURL = "http://172.18.1.50:3000/"
+    private let baseURL = "http://172.18.1.239:3000/"
 
         func createUser(user: User, completion: @escaping (Result<User, Error>) -> Void) {
             let url = baseURL + "auth/signup"

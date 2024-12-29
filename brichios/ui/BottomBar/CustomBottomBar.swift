@@ -10,8 +10,8 @@ import SwiftUI
 enum Tab: String, CaseIterable {
     case house
     case currencyConvert = "square.stack.3d.down.right"
-    case wallet = "banknote"
     case bank = "building.columns"
+    case wallet = "banknote"
     case person
     //case gearshape
 }

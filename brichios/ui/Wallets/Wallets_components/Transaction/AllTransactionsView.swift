@@ -11,12 +11,10 @@ struct AllTransactionsView: View {
     @Environment(\.dismiss) private var dismiss
     let transactions: [SolanaTransaction]
     
-    // State variables
     @State private var searchText = ""
     @State private var selectedPeriod: TimePeriod = .all
     @State private var selectedType: TransactionType = .all
     
-    // Enums for filtering
     enum TimePeriod: String, CaseIterable {
         case day = "24h"
         case week = "7d"
@@ -30,7 +28,6 @@ struct AllTransactionsView: View {
         case received = "Received"
     }
     
-    // Filtered transactions
     private var filteredTransactions: [SolanaTransaction] {
         transactions.filter { transaction in
             let matchesSearch = searchText.isEmpty ||
@@ -46,14 +43,17 @@ struct AllTransactionsView: View {
             }()
             
             let matchesPeriod: Bool = {
-                let now = Date()
+                let currentTimestamp = Int(Date().timeIntervalSince1970)
                 switch selectedPeriod {
                 case .day:
-                    return transaction.timestamp >= now.addingTimeInterval(-86400)
+                    let dayAgoTimestamp = currentTimestamp - 86400
+                    return transaction.blockTime >= dayAgoTimestamp
                 case .week:
-                    return transaction.timestamp >= now.addingTimeInterval(-604800)
+                    let weekAgoTimestamp = currentTimestamp - 604800
+                    return transaction.blockTime >= weekAgoTimestamp
                 case .month:
-                    return transaction.timestamp >= now.addingTimeInterval(-2592000)
+                    let monthAgoTimestamp = currentTimestamp - 2592000
+                    return transaction.blockTime >= monthAgoTimestamp
                 case .all:
                     return true
                 }
@@ -142,3 +142,4 @@ struct AllTransactionsView: View {
         }
     }
 }
+
